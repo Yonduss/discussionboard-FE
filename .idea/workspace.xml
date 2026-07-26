@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a1a79e8-6c2a-46ba-9628-dc05615d06a1" name="Changes" comment="Added function for post images, likes, and reports">
+    <list default="true" id="9a1a79e8-6c2a-46ba-9628-dc05615d06a1" name="Changes" comment="Version updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-FE/src/components/PostCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-FE/src/components/PostCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-FE/src/pages/PostDetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-FE/src/pages/PostDetailPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react-FE/src/styles/post-detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/react-FE/src/styles/post-detail.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,23 +65,23 @@
 }]]></component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.064897145628594" />
-      <entry key="MS500" value="3.0989925590617267" />
-      <entry key="S2" value="5.569222622254672" />
-      <entry key="S5" value="6.376185659500544" />
-      <entry key="S10" value="6.678760792829975" />
-      <entry key="S30" value="6.8909877759659715" />
-      <entry key="S60" value="6.981124899084894" />
-      <entry key="M2" value="7.437324922126598" />
-      <entry key="M5" value="9.145784244393617" />
-      <entry key="M10" value="10.594828422669044" />
-      <entry key="M15" value="11.321295967941868" />
-      <entry key="M30" value="13.590979538490634" />
-      <entry key="H1" value="22.357212459026627" />
-      <entry key="H2" value="39.922413134017546" />
-      <entry key="H4" value="59.109732848165784" />
-      <entry key="D1" value="85.90691414848727" />
-      <entry key="W1" value="91.94390774224483" />
+      <entry key="MS100" value="1.0157821783896879" />
+      <entry key="MS500" value="1.7388314966206195" />
+      <entry key="S2" value="3.0520181240743933" />
+      <entry key="S5" value="3.807044960839148" />
+      <entry key="S10" value="4.713522169667314" />
+      <entry key="S30" value="8.14300425711949" />
+      <entry key="S60" value="11.514401104517209" />
+      <entry key="M2" value="14.66471999564324" />
+      <entry key="M5" value="18.441157747149198" />
+      <entry key="M10" value="22.11981883598913" />
+      <entry key="M15" value="24.460363264196094" />
+      <entry key="M30" value="28.899694859553723" />
+      <entry key="H1" value="38.32623062871537" />
+      <entry key="H2" value="56.259090481228085" />
+      <entry key="H4" value="76.36542071358303" />
+      <entry key="D1" value="105.23403494259493" />
+      <entry key="W1" value="111.84079047361342" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -106,23 +103,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.21506694128130427" />
-      <entry key="MS500" value="2.7669151806650927" />
-      <entry key="S2" value="5.469275570761112" />
-      <entry key="S5" value="6.33446770462721" />
-      <entry key="S10" value="6.657592759275876" />
-      <entry key="S30" value="6.883860949558228" />
-      <entry key="S60" value="6.977535402630224" />
-      <entry key="M2" value="7.435425656903257" />
-      <entry key="M5" value="9.144862944331216" />
-      <entry key="M10" value="10.59429912070235" />
-      <entry key="M15" value="11.320920841844542" />
-      <entry key="M30" value="13.590756322208312" />
-      <entry key="H1" value="22.356988734527384" />
-      <entry key="H2" value="39.922149128840005" />
-      <entry key="H4" value="59.10950453730049" />
-      <entry key="D1" value="85.9068515964887" />
-      <entry key="W1" value="91.94389798391661" />
+      <entry key="MS100" value="0.9880080799922902" />
+      <entry key="MS500" value="1.7296364957944454" />
+      <entry key="S2" value="3.048217555362836" />
+      <entry key="S5" value="3.805169434346842" />
+      <entry key="S10" value="4.7123548340269465" />
+      <entry key="S30" value="8.142292694109116" />
+      <entry key="S60" value="11.513882117632619" />
+      <entry key="M2" value="14.664379095168336" />
+      <entry key="M5" value="18.440899152289074" />
+      <entry key="M10" value="22.119560140411046" />
+      <entry key="M15" value="24.46012683554367" />
+      <entry key="M30" value="28.89951123314302" />
+      <entry key="H1" value="38.3260298236713" />
+      <entry key="H2" value="56.25884234831628" />
+      <entry key="H4" value="76.36519897904262" />
+      <entry key="D1" value="105.23397223976716" />
+      <entry key="W1" value="111.84078063554344" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -195,7 +192,7 @@
       <option name="presentableId" value="Default" />
       <updated>1781178275087</updated>
       <workItem from="1784993274601" duration="1341000" />
-      <workItem from="1785037774835" duration="12174000" />
+      <workItem from="1785037774835" duration="13733000" />
     </task>
     <task id="LOCAL-00001" summary="Added H2 database and replace memory repositories with JPA">
       <option name="closed" value="true" />
@@ -213,7 +210,23 @@
       <option name="project" value="LOCAL" />
       <updated>1782403908795</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add unlike feature and fix concurrent like count updates">
+      <option name="closed" value="true" />
+      <created>1785055183390</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1785055183390</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Version updated">
+      <option name="closed" value="true" />
+      <created>1785055328172</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1785055328172</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +237,9 @@
     <MESSAGE value="Added PostImage, PostLike and PostReport entities" />
     <MESSAGE value="Added function for post images, likes, and reports" />
     <MESSAGE value="Added support for post images, likes, and reports" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added support for post images, likes, and reports" />
+    <MESSAGE value="Add unlike feature and fix concurrent like count updates" />
+    <MESSAGE value="Version updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version updated" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
