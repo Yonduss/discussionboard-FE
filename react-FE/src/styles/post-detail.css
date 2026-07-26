@@ -189,6 +189,10 @@
   transform: translateY(-1px);
 }
 
+.like-button span {
+  margin-left: 4px;
+}
+
 .report-button {
   margin-left: auto;
 }

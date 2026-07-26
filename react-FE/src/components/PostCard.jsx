@@ -45,7 +45,8 @@ function PostCard({ post }) {
 
             <div className="post-stats">
                 <div className="stat">
-                    👍 <span>{post.likeCount}</span>
+                    {post.liked ? "❤️ " : "👍 "}
+                    <span>{post.likeCount}</span>
                 </div>
 
                 <div className="stat">

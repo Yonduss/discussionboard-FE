@@ -106,6 +106,16 @@ function PostDetailPage() {
         }
     }
 
+    async function handleUnlikePost() {
+        try {
+            await api.delete(`/api/v1/posts/${postId}/likes`);
+            await reloadPost();
+        } catch (error) {
+            console.error("Unlike error:", error);
+            alert(error.message || "Failed to unlike post.");
+        }
+    }
+
     async function handleReportPost() {
         const reason = window.prompt(
             "Please enter the reason for reporting this post."
@@ -247,9 +257,10 @@ function PostDetailPage() {
                     <button
                         type="button"
                         className="like-button"
-                        onClick={handleLikePost}
+                        onClick={post.liked ? handleUnlikePost : handleLikePost}
                     >
-                        👍 <span>{post.likeCount}</span>
+                        {post.liked ? "❤️" : "👍"}
+                        <span>{post.likeCount}</span>
                     </button>
 
                     <span className="view-count">
