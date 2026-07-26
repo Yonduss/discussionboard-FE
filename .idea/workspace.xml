@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9a1a79e8-6c2a-46ba-9628-dc05615d06a1" name="Changes" comment="Added function for post images, likes, and reports" />
+    <list default="true" id="9a1a79e8-6c2a-46ba-9628-dc05615d06a1" name="Changes" comment="Added function for post images, likes, and reports">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-FE/src/components/PostCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-FE/src/components/PostCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-FE/src/pages/PostDetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-FE/src/pages/PostDetailPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-FE/src/styles/post-detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/react-FE/src/styles/post-detail.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,31 +60,31 @@
     &quot;assignee&quot;: &quot;Yonduss&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Yonduss/discussionboard.git&quot;,
-    &quot;accountId&quot;: &quot;d577b601-c4f6-40eb-9a99-44c0f94b2575&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Yonduss/discussionboard-FE.git",
+    "accountId": "d577b601-c4f6-40eb-9a99-44c0f94b2575"
   }
-}</component>
+}]]></component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0085874499863037" />
-      <entry key="MS500" value="2.3939577801410286" />
-      <entry key="S2" value="7.331065477799122" />
-      <entry key="S5" value="10.899204922494274" />
-      <entry key="S10" value="12.709879926030517" />
-      <entry key="S30" value="14.174679078717162" />
-      <entry key="S60" value="14.578974748522269" />
-      <entry key="M2" value="14.789814620698037" />
-      <entry key="M5" value="15.525890435178779" />
-      <entry key="M10" value="18.942919328228758" />
-      <entry key="M15" value="22.709149950831577" />
-      <entry key="M30" value="31.184185135482007" />
-      <entry key="H1" value="39.8933793905034" />
-      <entry key="H2" value="46.62643340788322" />
-      <entry key="H4" value="50.91195072344147" />
-      <entry key="D1" value="55.08877927363233" />
-      <entry key="W1" value="55.868168350461005" />
+      <entry key="MS100" value="1.064897145628594" />
+      <entry key="MS500" value="3.0989925590617267" />
+      <entry key="S2" value="5.569222622254672" />
+      <entry key="S5" value="6.376185659500544" />
+      <entry key="S10" value="6.678760792829975" />
+      <entry key="S30" value="6.8909877759659715" />
+      <entry key="S60" value="6.981124899084894" />
+      <entry key="M2" value="7.437324922126598" />
+      <entry key="M5" value="9.145784244393617" />
+      <entry key="M10" value="10.594828422669044" />
+      <entry key="M15" value="11.321295967941868" />
+      <entry key="M30" value="13.590979538490634" />
+      <entry key="H1" value="22.357212459026627" />
+      <entry key="H2" value="39.922413134017546" />
+      <entry key="H4" value="59.109732848165784" />
+      <entry key="D1" value="85.90691414848727" />
+      <entry key="W1" value="91.94390774224483" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -101,23 +106,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.3096125783216835" />
-      <entry key="MS500" value="2.165112018236457" />
-      <entry key="S2" value="7.256970512475409" />
-      <entry key="S5" value="10.865937621801839" />
-      <entry key="S10" value="12.692376358349684" />
-      <entry key="S30" value="14.168614877493487" />
-      <entry key="S60" value="14.575911257145941" />
-      <entry key="M2" value="14.788273910151386" />
-      <entry key="M5" value="15.525178974005616" />
-      <entry key="M10" value="18.942221855234912" />
-      <entry key="M15" value="22.708328513141467" />
-      <entry key="M30" value="31.18323665229697" />
-      <entry key="H1" value="39.89257924506598" />
-      <entry key="H2" value="46.62590036057996" />
-      <entry key="H4" value="50.91164116358764" />
-      <entry key="D1" value="55.08872064349324" />
-      <entry key="W1" value="55.86815978670026" />
+      <entry key="MS100" value="0.21506694128130427" />
+      <entry key="MS500" value="2.7669151806650927" />
+      <entry key="S2" value="5.469275570761112" />
+      <entry key="S5" value="6.33446770462721" />
+      <entry key="S10" value="6.657592759275876" />
+      <entry key="S30" value="6.883860949558228" />
+      <entry key="S60" value="6.977535402630224" />
+      <entry key="M2" value="7.435425656903257" />
+      <entry key="M5" value="9.144862944331216" />
+      <entry key="M10" value="10.59429912070235" />
+      <entry key="M15" value="11.320920841844542" />
+      <entry key="M30" value="13.590756322208312" />
+      <entry key="H1" value="22.356988734527384" />
+      <entry key="H2" value="39.922149128840005" />
+      <entry key="H4" value="59.10950453730049" />
+      <entry key="D1" value="85.9068515964887" />
+      <entry key="W1" value="91.94389798391661" />
     </decayedShown>
   </component>
   <component name="ProblemsViewState">
@@ -190,7 +195,7 @@
       <option name="presentableId" value="Default" />
       <updated>1781178275087</updated>
       <workItem from="1784993274601" duration="1341000" />
-      <workItem from="1785037774835" duration="6096000" />
+      <workItem from="1785037774835" duration="12174000" />
     </task>
     <task id="LOCAL-00001" summary="Added H2 database and replace memory repositories with JPA">
       <option name="closed" value="true" />
