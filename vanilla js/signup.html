@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 FIFA WC Board</title>
+    <link rel="stylesheet" href="./css/auth.css">
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+
+<body>
+    <div class="top-banner">
+        <a class="logo-img" href="posts.html">
+            <img src="/frontend/images/WC26_logo.svg" alt="logo" class="logo-img">
+        </a>
+
+        <h2>2026 FIFA WORLD CUP™</h2>
+    </div>
+
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+
+        <div class="main-profile-section">
+            <div class="main-profile-image-container" id="profileImageContainer">
+                <div class="main-profile-circle empty" id="profileCircle" title="Click to add profile image"></div>
+            </div>
+
+            <div class="main-profile-url-box" id="profileUrlBox">
+                <label for="profileImageUrl">Profile Image URL</label>
+                <input type="text" id="profileImageUrl" name="profileImageUrl" placeholder="Enter image URL and press Enter">
+            </div>
+        </div>
+
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Enter your password again" required>
+                <div class="password-match-indicator" id="passwordMatch"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="nickname">Nickname</label>
+                <input type="text" id="nickname" name="nickname" placeholder="Enter your nickname" required>
+                <div class="error-message" id="nicknameError"></div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="signup-btn" id="signupBtn">Sign Up</button>
+                <button type="button" class="login-btn" id="loginBtn">Go to Login</button>
+            </div>
+        </form>
+    </div>
+    <script type="module" src="./js/auth-signup.js"></script>
+</body>
+
+</html>

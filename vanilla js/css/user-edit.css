@@ -1,0 +1,183 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-container {
+    background: #fafaf8;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(20, 20, 20, 0.12);
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+h1 {
+    text-align: center;
+    color: #1c1c1c;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.edit-profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.edit-profile-image-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+}
+
+.edit-profile-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #eeeeea;
+    border: 2px dashed #d5d5cf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.edit-profile-circle:hover {
+    background: #9a9a94;
+    border-color: #181818;
+}
+
+.edit-profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.edit-profile-circle.empty::before {
+    content: "📷";
+    font-size: 40px;
+}
+
+.edit-profile-url-box {
+    display: none;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.edit-profile-url-box.show {
+    display: block;
+}
+
+#profileImageUrl {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #1c1c1c;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d5d5cf;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #1c1c1c;
+    box-shadow: 0 2px 8px rgba(20, 20, 20, 0.08);
+}
+
+input[readonly] {
+    background: #eeeeea;
+    cursor: not-allowed;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.save-changes-btn {
+    background: #f8f8f5;
+    color: #1c1c1c;
+    border: 1px solid #1c1c1c;
+}
+
+.save-changes-btn:hover {
+    background: #1c1c1c;
+    color: #f8f8f5;
+}
+
+.delete-acc-btn {
+    font-size: 12px;
+    background: #fafaf8;
+    color: #dc3545;
+}
+
+.delete-acc-btn:hover {
+    transform: translateY(-1px);
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.password-match-indicator {
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.password-match-indicator.match {
+    color: #28a745;
+    display: block;
+}
+
+.password-match-indicator.nomatch {
+    color: #dc3545;
+    display: block;
+}
+

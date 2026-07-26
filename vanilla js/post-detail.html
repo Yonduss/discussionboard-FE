@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 FIFA WC Board</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/post.css">
+    <link rel="stylesheet" href="./css/post-detail.css">
+</head>
+
+<body>
+    <div class="top-banner">
+        <a class="logo-img" href="posts.html" id="logoImg">
+            <img src="/frontend/images/WC26_logo.svg" alt="logo" class="logo-img">
+        </a>
+
+        <h2>2026 FIFA WORLD CUP™</h2>
+
+        <div class="profile-container">
+            <div class="profile-circle" id="profileCircle">👤</div>
+            <div class="profile-dropdown" id="profileDropdown">
+                <a href="user-edit.html">Edit Profile</a>
+                <a href="password-edit.html">Change Password</a>
+                <a href="login.html" id="logoutButton">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-detail">
+        <section class="post-detail-header">
+            <div class="post-title-row">
+                <h1 id="postTitle">Post Title</h1>
+
+                <div class="author-info">
+                    <div class="author-circle" id="authorCircle"></div>
+                    <div class="author-details">
+                        <div class="author-name" id="authorName">Author Nickname</div>
+                        <div class="post-time" id="postTime">Just now</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-meta">
+            <div class="post-actions" id="postActions" hidden>
+                <button id="editPostButton">Edit</button>
+                <button id="deletePostButton">Delete</button>
+            </div>
+        </section>
+
+        <section class="post-content">
+            <p id="postContent">Post content goes here.</p>
+            <div id="postImages" class="post-images"></div>
+        </section>
+
+        <section class="post-stats">
+            <button class="like-button" id="likeButton">👍 <span id="likeCount">0</span> </button>
+            <span class="view-count" id="viewCount">Views: 0</span>
+            <span class="comment-count" id="commentCount">Comments: 0</span>
+            <button class="report-button" id="reportButton">🚨</button>
+        </section>
+
+        <section class="comment-section">
+            <div class="comment-input-row">
+                <label for="commentInput"></label>
+                <input type="text" id="commentInput" placeholder="Enter comment here">
+                <button id="addCommentButton">Add Comment</button>
+            </div>
+
+            <div class="comment-list" id="commentList">
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="./js/post-detail.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 FIFA WC Board</title>
+    <link rel="stylesheet" href="./css/post.css">
+    <link rel="stylesheet" href="./css/post-write.css">
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+
+<body>
+    <div class="top-banner">
+        <a class="logo-img" href="posts.html">
+            <img src="/frontend/images/WC26_logo.svg" alt="logo" class="logo-img">
+        </a>
+
+        <h2>2026 FIFA WORLD CUP™</h2>
+
+        <div class="profile-container">
+            <div class="profile-circle" id="profileCircle">👤</div>
+            <div class="profile-dropdown" id="profileDropdown">
+                <a href="user-edit.html">Edit Profile</a>
+                <a href="password-edit.html">Change Password</a>
+                <a href="login.html" id="logoutButton">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-write-container">
+        <h3>Create New Post</h3>
+
+        <form id="postForm">
+            <div class="form-group">
+                <label for="postTitle">Title</label>
+                <input type="text" id="postTitle" name="title" placeholder="Enter title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="postContent">Contents</label>
+                <textarea id="postContent" name="content" rows="8" placeholder="Enter contents" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Images</label>
+                <div id="imageInputs">
+                    <div class="image-input-row">
+                        <input name="images[]" placeholder="Enter Image URL" type="url">
+                    </div>
+                </div>
+
+                <button type="button" id="addImageButton">Add image</button>
+            </div>
+
+            <button type="submit" id="createPostButton">Create post</button>
+        </form>
+    </div>
+
+    <script type="module" src="./js/post-write.js"></script>
+</body>
+
+</html>

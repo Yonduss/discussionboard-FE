@@ -1,0 +1,99 @@
+import { formatDate } from "../api/api.js";
+import { useAuth } from "../contexts/AuthContext.js";
+
+function CommentItem({
+                         comment,
+                         isReply,
+                         onReply,
+                         onEdit,
+                         onDelete
+                     }) {
+    const { currentUser } = useAuth();
+
+    const isAuthor = currentUser != null &&
+        Number(comment.userId) === Number(currentUser.id);
+
+    const canModify = isAuthor && !comment.deleted;
+
+    const displayedTime = comment.edited && comment.updatedAt
+            ? comment.updatedAt
+            : comment.createdAt;
+
+    return (
+        <article
+            className={`comment-item ${
+                isReply ? "reply" : ""
+            }`}
+        >
+            <div className="comment-header">
+                <div className="comment-author-circle">
+                    {comment.profileImageUrl ? (
+                        <img
+                            src={comment.profileImageUrl}
+                            alt={`${comment.nickname} profile`}
+                        />
+                    ) : (
+                        comment.nickname
+                            ?.charAt(0)
+                            .toUpperCase()
+                    )}
+                </div>
+
+                <div className="comment-author-info">
+                    <div className="comment-author-name">
+                        {comment.nickname}
+                    </div>
+
+                    <div className="comment-time">
+                        {formatDate(displayedTime)}
+                    </div>
+                </div>
+
+                {!comment.deleted && (
+                    <div className="comment-actions">
+                        <button
+                            type="button"
+                            onClick={() => onReply(comment)}
+                        >
+                            Reply
+                        </button>
+
+                        {canModify && (
+                            <>
+                                <button
+                                    type="button"
+                                    onClick={() => onEdit(comment)}
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className="delete-comment-button"
+                                    onClick={() => onDelete(comment)}
+                                >
+                                    Delete
+                                </button>
+                            </>
+                        )}
+                    </div>
+                )}
+            </div>
+
+            <div className="comment-body">
+                <span className="comment-content">
+                    {comment.content}
+                </span>
+
+                {comment.edited && !comment.deleted && (
+                    <span className="edited-label">
+                        {" "}
+                        (edited)
+                    </span>
+                )}
+            </div>
+        </article>
+    );
+}
+
+export default CommentItem;

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 FIFA WC Board</title>
+    <link rel="stylesheet" href="./css/post.css">
+    <link rel="stylesheet" href="./css/user-edit.css">
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+
+<body>
+    <div class="top-banner">
+        <a class="logo-img" href="posts.html">
+            <img src="/frontend/images/WC26_logo.svg" alt="logo" class="logo-img">
+        </a>
+
+        <h2>2026 FIFA WORLD CUP™</h2>
+
+        <div class="profile-container">
+            <div class="profile-circle" id="profileCircle">👤</div>
+            <div class="profile-dropdown" id="profileDropdown">
+                <a href="user-edit.html">Edit Profile</a>
+                <a href="password-edit.html">Change Password</a>
+                <a href="login.html" id="logoutButton">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="signup-container">
+        <h1>Edit Profile</h1>
+
+        <div class="edit-profile-section">
+            <div class="edit-profile-image-container" id="profileImageContainer">
+                <div class="edit-profile-circle empty" id="editProfileCircle" title="Click to add profile image"></div>
+            </div>
+
+            <div class="edit-profile-url-box" id="profileUrlBox">
+                <label for="profileImageUrl">Profile Image URL</label>
+                <input type="text" id="profileImageUrl" name="profileImageUrl" placeholder="Enter image URL and press Enter">
+            </div>
+        </div>
+
+        <form id="userEditForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="nickname">Nickname</label>
+                <input type="text" id="nickname" placeholder="Enter your nickname" required >
+                <div class="error-message" id="nicknameError"></div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="save-changes-btn" id="saveBtn">Save Changes</button>
+                <button type="button" class="delete-acc-btn" id="deleteAccountBtn">Delete Account</button>
+            </div>
+        </form>
+    </div>
+
+    <script type="module" src="./js/user-edit.js"></script>
+</body>
+
+</html>

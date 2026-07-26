@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9a1a79e8-6c2a-46ba-9628-dc05615d06a1" name="Changes" comment="Added function for post images, likes, and reports" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="discussionboard" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="discussionboard" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Yonduss&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Yonduss/discussionboard.git&quot;,
+    &quot;accountId&quot;: &quot;d577b601-c4f6-40eb-9a99-44c0f94b2575&quot;
+  }
+}</component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0085874499863037" />
+      <entry key="MS500" value="2.3939577801410286" />
+      <entry key="S2" value="7.331065477799122" />
+      <entry key="S5" value="10.899204922494274" />
+      <entry key="S10" value="12.709879926030517" />
+      <entry key="S30" value="14.174679078717162" />
+      <entry key="S60" value="14.578974748522269" />
+      <entry key="M2" value="14.789814620698037" />
+      <entry key="M5" value="15.525890435178779" />
+      <entry key="M10" value="18.942919328228758" />
+      <entry key="M15" value="22.709149950831577" />
+      <entry key="M30" value="31.184185135482007" />
+      <entry key="H1" value="39.8933793905034" />
+      <entry key="H2" value="46.62643340788322" />
+      <entry key="H4" value="50.91195072344147" />
+      <entry key="D1" value="55.08877927363233" />
+      <entry key="W1" value="55.868168350461005" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.3096125783216835" />
+      <entry key="MS500" value="2.165112018236457" />
+      <entry key="S2" value="7.256970512475409" />
+      <entry key="S5" value="10.865937621801839" />
+      <entry key="S10" value="12.692376358349684" />
+      <entry key="S30" value="14.168614877493487" />
+      <entry key="S60" value="14.575911257145941" />
+      <entry key="M2" value="14.788273910151386" />
+      <entry key="M5" value="15.525178974005616" />
+      <entry key="M10" value="18.942221855234912" />
+      <entry key="M15" value="22.708328513141467" />
+      <entry key="M30" value="31.18323665229697" />
+      <entry key="H1" value="39.89257924506598" />
+      <entry key="H2" value="46.62590036057996" />
+      <entry key="H4" value="50.91164116358764" />
+      <entry key="D1" value="55.08872064349324" />
+      <entry key="W1" value="55.86815978670026" />
+    </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3EzP9kmDlRkepjc3aNGfa6xkaWJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build discussionboard 2.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.Unnamed.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/jun/KTB/discussionboard FE",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "settings.sync",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/react-FE/src/components" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="DEBUG_MODE" value="true" />
+      <module name="discussionboard.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ktb.discussionboard.DiscussionboardApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-WS-262.8665.341" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9a1a79e8-6c2a-46ba-9628-dc05615d06a1" name="Changes" comment="" />
+      <created>1781178275087</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1781178275087</updated>
+      <workItem from="1784993274601" duration="1341000" />
+      <workItem from="1785037774835" duration="6096000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added H2 database and replace memory repositories with JPA">
+      <option name="closed" value="true" />
+      <created>1782058299922</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1782058299922</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added function for post images, likes, and reports">
+      <option name="closed" value="true" />
+      <created>1782403908795</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1782403908795</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added H2 database and replace memory repositories with JPA" />
+    <MESSAGE value="Added PostImage, PostLike and PostReport entities" />
+    <MESSAGE value="Added function for post images, likes, and reports" />
+    <MESSAGE value="Added support for post images, likes, and reports" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added support for post images, likes, and reports" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
