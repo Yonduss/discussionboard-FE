@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-import api, { formatDate, requireLogin } from "../api/api.js";
+import api, { formatDate } from "../api/api.js";
 import { useAuth } from "../contexts/AuthContext.js";
-
 import Header from "../components/Header.jsx";
 import CommentSection from "../pages/CommentSection.jsx";
 
@@ -13,26 +11,12 @@ function PostDetailPage() {
     const { postId } = useParams();
     const navigate = useNavigate();
 
-    const { currentUser, loading: authLoading } = useAuth();
+    const { currentUser } = useAuth();
     const [post, setPost] = useState(null);
     const [commentCount,setCommentCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        requireLogin();
-
-        if (authLoading) {
-            return;
-        }
-
-        if (!currentUser) {
-            navigate("/login", {
-                replace: true
-            });
-            return;
-        }
-
-
         async function initializePage() {
             if (!postId) {
                 alert("Post id is missing.");
@@ -61,20 +45,7 @@ function PostDetailPage() {
 
         initializePage();
 
-    }, [
-        postId,
-        navigate,
-        currentUser,
-        authLoading
-    ]);
-
-    async function reloadPost() {
-        const result = await api.get(
-            `/api/v1/posts/${postId}`
-        );
-
-        setPost(result.data);
-    }
+    }, [postId, navigate]);
 
     function handleEditPost() {
         navigate(`/posts/${postId}/edit`);
@@ -98,9 +69,17 @@ function PostDetailPage() {
 
     async function handleLikePost() {
         try {
-            await api.post(`/api/v1/posts/${postId}/likes`);
-            await reloadPost();
-        } catch (error) {
+            const result = await api.post(
+                `/api/v1/posts/${postId}/likes`
+            );
+
+            setPost((previous) => ({
+                ...previous,
+                likeCount: result.data.likeCount,
+                liked: result.data.liked
+            }));
+
+        } catch(error) {
             console.error("Like error:", error);
             alert(error.message || "Failed to like post.");
         }
@@ -108,9 +87,17 @@ function PostDetailPage() {
 
     async function handleUnlikePost() {
         try {
-            await api.delete(`/api/v1/posts/${postId}/likes`);
-            await reloadPost();
-        } catch (error) {
+            const result = await api.delete(
+                `/api/v1/posts/${postId}/likes`
+            );
+
+            setPost((previous) => ({
+                ...previous,
+                likeCount: result.data.likeCount,
+                liked: result.data.liked
+            }));
+
+        } catch(error) {
             console.error("Unlike error:", error);
             alert(error.message || "Failed to unlike post.");
         }
@@ -152,15 +139,8 @@ function PostDetailPage() {
         );
     }
 
-    if (isLoading || authLoading) {
-        return (
-            <>
-                <Header />
-                <main className="post-detail">
-                    Loading post...
-                </main>
-            </>
-        );
+    if (!post) {
+        return null;
     }
 
     const isAuthor = Number(currentUser.id) === Number(post.userId);
@@ -226,6 +206,7 @@ function PostDetailPage() {
 
                             <button
                                 type="button"
+                                className="delete-comment-button"
                                 onClick={handleDeletePost}
                             >
                                 Delete

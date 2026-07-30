@@ -1,5 +1,7 @@
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 const userLang = navigator.language;
+
+let refreshPromise = null;
 
 export class APIError extends Error {
     constructor(message, status, body) {
@@ -14,16 +16,13 @@ export function getAccessToken() {
     return localStorage.getItem("accessToken");
 }
 
-export function requireLogin() {
-    const accessToken = getAccessToken();
+export function getRefreshToken() {
+    return localStorage.getItem("refreshToken");
+}
 
-    if (!accessToken) {
-        alert("Please login first.");
-        window.location.href = "/login";
-        throw new Error("Access token is missing.");
-    }
-
-    return { accessToken };
+export function clearTokens() {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
 }
 
 export function formatDate(dateString) {
@@ -42,9 +41,78 @@ async function parseResponse(response) {
     try {
         return JSON.parse(text);
     } catch (error) {
-        console.error(error);
+        console.error("Failed to parse response:", error);
         return text;
     }
+}
+
+async function refreshAccessToken() {
+    const refreshToken = getRefreshToken();
+
+    if (!refreshToken) {
+        return null;
+    }
+
+    let response;
+
+    try {
+        response = await fetch(
+            `${API_BASE_URL}/api/v1/auth/reissue`,
+            {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    refreshToken
+                })
+            }
+        );
+    } catch (error) {
+        throw new APIError(
+            error.message || "Server connection failed.",
+            0,
+            null
+        );
+    }
+
+    const result = await parseResponse(response);
+
+    if (!response.ok) {
+        throw new APIError(
+            result?.message || "Failed to reissue tokens.",
+            response.status,
+            result
+        );
+    }
+
+    const newAccessToken = result?.data?.accessToken;
+    const newRefreshToken = result?.data?.refreshToken;
+
+    if (!newAccessToken || !newRefreshToken) {
+        throw new APIError(
+            "The token reissue response is invalid.",
+            response.status,
+            result
+        );
+    }
+
+    localStorage.setItem("accessToken", newAccessToken);
+    localStorage.setItem("refreshToken", newRefreshToken);
+
+    return newAccessToken;
+}
+
+async function getRefreshedAccessToken() {
+    if (!refreshPromise) {
+        refreshPromise = refreshAccessToken()
+            .finally(() => {
+                refreshPromise = null;
+            });
+    }
+
+    return refreshPromise;
 }
 
 async function request(path, options = {}) {
@@ -52,7 +120,8 @@ async function request(path, options = {}) {
         method = "GET",
         body,
         auth = true,
-        headers = {}
+        headers = {},
+        retryOnUnauthorized = true
     } = options;
 
     const requestHeaders = {
@@ -81,7 +150,10 @@ async function request(path, options = {}) {
     let response;
 
     try {
-        response = await fetch(`${API_BASE_URL}${path}`, fetchOptions);
+        response = await fetch(
+            `${API_BASE_URL}${path}`,
+            fetchOptions
+        );
     } catch (error) {
         throw new APIError(
             error.message || "Server connection failed.",
@@ -90,16 +162,36 @@ async function request(path, options = {}) {
         );
     }
 
+    if (response.status === 401 && auth && retryOnUnauthorized) {
+        try {
+            const newAccessToken = await getRefreshedAccessToken();
+
+            if (newAccessToken) {
+                return request(path, {
+                    ...options,
+                    retryOnUnauthorized: false
+                });
+            }
+        } catch (refreshError) {
+            console.error("Token reissue failed:", refreshError);
+        }
+
+        clearTokens();
+        window.location.replace("/login");
+
+        throw new APIError(
+            "Your session has expired. Please log in again.",
+            401,
+            null
+        );
+    }
+
     const result = await parseResponse(response);
 
     if (!response.ok) {
-        if (response.status === 401 && auth) {
-            localStorage.removeItem("accessToken");
-            window.location.replace("/login");
-        }
-
         throw new APIError(
-            result?.message || `Request failed with status ${response.status}`,
+            result?.message ||
+            `Request failed with status ${response.status}`,
             response.status,
             result
         );

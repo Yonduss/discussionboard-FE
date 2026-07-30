@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Header from "../components/Header.jsx";
@@ -12,35 +11,8 @@ function UserEditPage() {
 
     const {
         currentUser,
-        setCurrentUser,
-        loading: authLoading
+        setCurrentUser
     } = useAuth();
-
-    useEffect(() => {
-        if (!authLoading && !currentUser) {
-            navigate("/login", {
-                replace: true
-            });
-        }
-    }, [
-        authLoading,
-        currentUser,
-        navigate
-    ]);
-
-    if (authLoading || !currentUser) {
-        return (
-            <>
-                <Header />
-
-                <main className="auth-page">
-                    <div className="signup-container">
-                        Loading profile...
-                    </div>
-                </main>
-            </>
-        );
-    }
 
     return (
         <>

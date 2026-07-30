@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import api from "../api/api.js";
 import Header from "../components/Header.jsx";
-import { useAuth } from "../contexts/AuthContext.js";
 
 import "../styles/auth.css";
 import "../styles/user-edit.css";
@@ -16,20 +15,6 @@ function PasswordEditPage() {
     const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const { currentUser, loading: authLoading } = useAuth();
-
-    useEffect(() => {
-        if (authLoading) {
-            return;
-        }
-
-        if (!currentUser) {
-            navigate("/login", {
-                replace: true
-            });
-        }
-    }, [authLoading, currentUser, navigate]);
 
     const passwordsMatch =
         newPasswordConfirm !== "" && newPassword === newPasswordConfirm;
@@ -75,20 +60,6 @@ function PasswordEditPage() {
         } finally {
             setIsSubmitting(false);
         }
-    }
-
-    if (authLoading || !currentUser) {
-        return (
-            <>
-                <Header />
-
-                <main className="auth-page password-edit-page">
-                    <div className="signup-container">
-                        Loading...
-                    </div>
-                </main>
-            </>
-        );
     }
 
     return (

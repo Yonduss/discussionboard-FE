@@ -1,17 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import ImageUrlInputs from "../components/ImageUrlInputs.jsx";
-import { useAuth } from "../contexts/AuthContext.js";
 
 import "../styles/post-write.css";
 
 function PostWritePage() {
     const navigate = useNavigate();
-
-    const { currentUser, loading: authLoading } = useAuth();
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -22,18 +19,6 @@ function PostWritePage() {
         }]);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    useEffect(() => {
-        if (authLoading) {
-            return;
-        }
-
-        if (!currentUser) {
-            navigate("/login", {
-                replace: true
-            });
-        }
-    }, [authLoading, currentUser, navigate]);
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -78,18 +63,6 @@ function PostWritePage() {
         } finally {
             setIsSubmitting(false);
         }
-    }
-
-    if (authLoading || !currentUser) {
-        return (
-            <>
-                <Header />
-
-                <main className="post-write-container">
-                    Loading...
-                </main>
-            </>
-        );
     }
 
     return (

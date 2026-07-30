@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import api, { requireLogin } from "../api/api.js";
+import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import PostCard from "../components/PostCard.jsx";
 
@@ -14,78 +14,106 @@ function PostsPage() {
 
     const [posts, setPosts] = useState([]);
     const [hasNext, setHasNext] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [searchInput, setSearchInput] = useState("");
+    const [activeKeyword, setActiveKeyword] = useState("");
 
     const currentPageRef = useRef(0);
     const hasNextRef = useRef(true);
     const isLoadingRef = useRef(false);
 
-    useEffect(() => {
-        requireLogin();
-    }, []);
+    const loadPosts = useCallback(
+        async ({
+                   reset = false,
+                   keywordOverride
+               } = {}) => {
+            if (isLoadingRef.current) {
+                return;
+            }
 
-    const loadPosts = useCallback(async () => {
-        if (!hasNextRef.current || isLoadingRef.current) {
-            return;
-        }
+            if (!reset && !hasNextRef.current) {
+                return;
+            }
 
-        isLoadingRef.current = true;
-        setIsLoading(true);
+            const keyword = keywordOverride !== undefined
+                    ? keywordOverride
+                    : activeKeyword;
 
-        try {
-            const result = await api.get(
-                `/api/v1/posts?page=${
-                    currentPageRef.current
-                }&size=${PAGE_SIZE}`
-            );
+            const requestedPage = reset ? 0 : currentPageRef.current;
 
-            const pageData = result.data;
+            if (reset) {
+                currentPageRef.current = 0;
+                hasNextRef.current = true;
+            }
 
-            setPosts((previousPosts) => {
-                const postMap = new Map();
+            isLoadingRef.current = true;
+            setIsLoading(true);
 
-                [...previousPosts, ...(pageData.posts || [])].forEach((post) => {
-                    postMap.set(post.id, post);
+            try {
+                const query = new URLSearchParams({
+                    page: String(requestedPage),
+                    size: String(PAGE_SIZE)
                 });
 
-                return [...postMap.values()];
-            });
+                if (keyword) {
+                    query.set("keyword", keyword);
+                }
 
-            hasNextRef.current = pageData.hasNext;
-            setHasNext(pageData.hasNext);
+                const result = await api.get(
+                    `/api/v1/posts?${query.toString()}`
+                );
 
-            currentPageRef.current += 1;
-        } catch (error) {
-            console.error("Posts fetch error:", error);
-            alert(
-                error.message ||
-                "Failed to load posts."
-            );
+                const pageData = result.data;
 
-        } finally {
-            isLoadingRef.current = false;
-            setIsLoading(false);
-        }
-    }, []);
+                setPosts((previousPosts) => {
+                    const sourcePosts = reset
+                        ? pageData.posts || []
+                        : [
+                            ...previousPosts,
+                            ...(pageData.posts || [])
+                        ];
+
+                    const postMap = new Map();
+
+                    sourcePosts.forEach((post) => {
+                        postMap.set(post.id, post);
+                    });
+
+                    return [...postMap.values()];
+                });
+
+                hasNextRef.current = pageData.hasNext;
+                setHasNext(pageData.hasNext);
+
+                currentPageRef.current = requestedPage + 1;
+            } catch (error) {
+                console.error("Posts fetch error:", error);
+                alert(error.message || "Failed to load posts.");
+            } finally {
+                isLoadingRef.current = false;
+                setIsLoading(false);
+            }
+        },
+        [activeKeyword]
+    );
 
     useEffect(() => {
-        const timeoutId = window.setTimeout(() => {
-            void loadPosts();
-        }, 0);
-
-        return () => {
-            window.clearTimeout(timeoutId);
-        };
-    }, [loadPosts]);
+        void loadPosts({
+            reset: true,
+            keywordOverride: activeKeyword
+        });
+    }, [activeKeyword, loadPosts]);
 
     useEffect(() => {
         function handleScroll() {
             const scrollTop = window.scrollY;
             const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
+            const documentHeight =
+                document.documentElement.scrollHeight;
 
             if (scrollTop + windowHeight >= documentHeight - 100) {
-                loadPosts();
+                void loadPosts();
             }
         }
 
@@ -96,6 +124,36 @@ function PostsPage() {
         };
     }, [loadPosts]);
 
+    function handleSearch(event) {
+        event.preventDefault();
+
+        const trimmedKeyword = searchInput.trim();
+
+        if (trimmedKeyword === activeKeyword) {
+            void loadPosts({
+                reset: true,
+                keywordOverride: trimmedKeyword
+            });
+            return;
+        }
+
+        setActiveKeyword(trimmedKeyword);
+    }
+
+    function handleResetSearch() {
+        setSearchInput("");
+
+        if (activeKeyword === "") {
+            void loadPosts({
+                reset: true,
+                keywordOverride: ""
+            });
+            return;
+        }
+
+        setActiveKeyword("");
+    }
+
     return (
         <>
             <Header />
@@ -105,11 +163,61 @@ function PostsPage() {
                     <button
                         type="button"
                         className="create-post-btn"
-                        onClick={() => navigate("/posts/new")}
+                        onClick={() =>
+                            navigate("/posts/new")
+                        }
                     >
                         + Create Post
                     </button>
+
+                    <form
+                        className="post-search-form"
+                        onSubmit={handleSearch}
+                    >
+                        <input
+                            type="search"
+                            className="post-search-input"
+                            value={searchInput}
+                            onChange={(event) =>
+                                setSearchInput(
+                                    event.target.value
+                                )
+                            }
+                            placeholder="Search by title or content"
+                            aria-label="Search posts"
+                        />
+
+                        <div className="post-search-actions">
+                            <button
+                                type="submit"
+                                className="search-post-btn"
+                                disabled={isLoading}
+                            >
+                                🔎 Search
+                            </button>
+
+                            <button
+                                type="button"
+                                className="reset-search-btn"
+                                onClick={
+                                    handleResetSearch
+                                }
+                                disabled={isLoading}
+                            >
+                                🔄 Reset
+                            </button>
+                        </div>
+                    </form>
                 </div>
+
+                {activeKeyword && (
+                    <div className="search-result-info">
+                        Search results for:{" "}
+                        <strong>
+                            {activeKeyword}
+                        </strong>
+                    </div>
+                )}
 
                 <section className="posts-list">
                     {posts.map((post) => (
@@ -125,17 +233,22 @@ function PostsPage() {
                         </div>
                     )}
 
-                    {!hasNext && posts.length > 0 && (
-                        <div className="posts-end">
-                            No more posts.
-                        </div>
-                    )}
+                    {!isLoading &&
+                        !hasNext &&
+                        posts.length > 0 && (
+                            <div className="posts-end">
+                                No more posts.
+                            </div>
+                        )}
 
-                    {!isLoading && posts.length === 0 && (
-                        <div className="posts-empty">
-                            No posts available.
-                        </div>
-                    )}
+                    {!isLoading &&
+                        posts.length === 0 && (
+                            <div className="posts-empty">
+                                {activeKeyword
+                                    ? "No matching posts found."
+                                    : "No posts available."}
+                            </div>
+                        )}
                 </section>
             </main>
         </>

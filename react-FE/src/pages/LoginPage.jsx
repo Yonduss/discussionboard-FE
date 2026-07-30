@@ -41,6 +41,7 @@ function LoginPage() {
 
             localStorage.setItem("loginUserEmail", result.data.email);
             localStorage.setItem("accessToken", result.data.accessToken);
+            localStorage.setItem("refreshToken", result.data.refreshToken);
 
             await loadCurrentUser();
 

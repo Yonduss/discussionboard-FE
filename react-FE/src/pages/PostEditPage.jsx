@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import api, { requireLogin } from "../api/api.js";
+import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import ImageUrlInputs from "../components/ImageUrlInputs.jsx";
 import { useAuth } from "../contexts/AuthContext.js";
@@ -11,7 +11,7 @@ import "../styles/post-write.css";
 function PostEditPage() {
     const { postId } = useParams();
     const navigate = useNavigate();
-    const { currentUser, loading: authLoading } = useAuth();
+    const { currentUser } = useAuth();
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -21,20 +21,6 @@ function PostEditPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
-        requireLogin();
-
-        if (authLoading) {
-            return;
-        }
-
-        if (!currentUser) {
-            navigate("/login", {
-                replace: true
-            });
-
-            return;
-        }
-
         async function initializePage() {
             if (!postId) {
                 alert("Post id is missing.");
@@ -94,8 +80,7 @@ function PostEditPage() {
     }, [
         postId,
         navigate,
-        currentUser,
-        authLoading
+        currentUser
     ]);
 
     async function handleSubmit(event) {

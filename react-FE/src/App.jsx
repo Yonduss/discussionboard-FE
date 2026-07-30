@@ -8,21 +8,57 @@ import PostWritePage from "./pages/PostWritePage.jsx";
 import PostEditPage from "./pages/PostEditPage.jsx";
 import UserEditPage from "./pages/UserEditPage.jsx";
 import PasswordEditPage from "./pages/PasswordEditPage.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 
 function App() {
   return (
       <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/posts" element={<PostsPage />} />
-            <Route path="/posts/new" element={<PostWritePage />} />
-            <Route path="/posts/:postId" element={<PostDetailPage />} />
-            <Route path="/posts/:postId/edit" element={<PostEditPage />} />
-            <Route path="/users/edit" element={<UserEditPage />} />
-            <Route path="/users/password-edit" element={<PasswordEditPage />}/>
-        </Routes>
+          <Routes>
+              <Route path="*" element={<Navigate to="/login" replace />} />
+              <Route path="/" element={<Navigate to="/login" replace />} />
+
+              <Route
+                  path="/login"
+                  element={<LoginPage />}
+              />
+
+              <Route
+                  path="/signup"
+                  element={<SignupPage />}
+              />
+
+              <Route element={<ProtectedRoute />}>
+                  <Route
+                      path="/posts"
+                      element={<PostsPage />}
+                  />
+
+                  <Route
+                      path="/posts/new"
+                      element={<PostWritePage />}
+                  />
+
+                  <Route
+                      path="/posts/:postId"
+                      element={<PostDetailPage />}
+                  />
+
+                  <Route
+                      path="/posts/:postId/edit"
+                      element={<PostEditPage />}
+                  />
+
+                  <Route
+                      path="/users/edit"
+                      element={<UserEditPage />}
+                  />
+
+                  <Route
+                      path="/users/password-edit"
+                      element={<PasswordEditPage />}
+                  />
+              </Route>
+          </Routes>
       </BrowserRouter>
   );
 }
