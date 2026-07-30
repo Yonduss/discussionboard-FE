@@ -6,7 +6,8 @@ function CommentItem({
                          isReply,
                          onReply,
                          onEdit,
-                         onDelete
+                         onDelete,
+                         disabled = false
                      }) {
     const { currentUser } = useAuth();
 
@@ -15,7 +16,8 @@ function CommentItem({
 
     const canModify = isAuthor && !comment.deleted;
 
-    const displayedTime = comment.edited && comment.updatedAt
+    const displayedTime =
+        comment.edited && comment.updatedAt
             ? comment.updatedAt
             : comment.createdAt;
 
@@ -54,6 +56,7 @@ function CommentItem({
                         <button
                             type="button"
                             onClick={() => onReply(comment)}
+                            disabled={disabled}
                         >
                             Reply
                         </button>
@@ -63,6 +66,7 @@ function CommentItem({
                                 <button
                                     type="button"
                                     onClick={() => onEdit(comment)}
+                                    disabled={disabled}
                                 >
                                     Edit
                                 </button>
@@ -71,6 +75,7 @@ function CommentItem({
                                     type="button"
                                     className="delete-comment-button"
                                     onClick={() => onDelete(comment)}
+                                    disabled={disabled}
                                 >
                                     Delete
                                 </button>

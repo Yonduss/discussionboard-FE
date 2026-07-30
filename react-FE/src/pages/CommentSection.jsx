@@ -4,25 +4,36 @@ import api from "../api/api.js";
 import CommentForm from "../components/CommentForm.jsx";
 import CommentItem from "./CommentItem.jsx";
 
-function CommentSection({postId, onCommentCountChange}) {
+function CommentSection({
+                            postId,
+                            onCommentCountChange
+                        }) {
     const [comments, setComments] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const applyComments = useCallback((result) => {
-        const loadedComments = result.data.comments || [];
+    const [isInitialLoading, setIsInitialLoading] = useState(true);
 
-        setComments(loadedComments);
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
-        onCommentCountChange(loadedComments.filter(
-                (comment) => !comment.deleted
-            ).length
-        );
-    }, [onCommentCountChange]);
+    const [isMutating, setIsMutating] = useState(false);
 
-    const loadComments = useCallback(async () => {
+    const applyComments = useCallback(
+        (result) => {
+            const loadedComments = result.data.comments || [];
+
+            setComments(loadedComments);
+
+            onCommentCountChange(
+                loadedComments.filter(
+                    (comment) => !comment.deleted
+                ).length
+            );
+        },
+        [onCommentCountChange]
+    );
+
+    const refreshComments = useCallback(async () => {
         try {
-            setIsLoading(true);
+            setIsRefreshing(true);
 
             const result = await api.get(
                 `/api/v1/posts/${postId}/comments`
@@ -30,11 +41,11 @@ function CommentSection({postId, onCommentCountChange}) {
 
             applyComments(result);
         } catch (error) {
-            console.error("Comments fetch error:", error);
+            console.error("Comments refresh error:", error);
 
-            alert(error.message || "Failed to load comments.");
+            alert(error.message || "Failed to refresh comments.");
         } finally {
-            setIsLoading(false);
+            setIsRefreshing(false);
         }
     }, [postId, applyComments]);
 
@@ -50,7 +61,6 @@ function CommentSection({postId, onCommentCountChange}) {
                 if (!cancelled) {
                     applyComments(result);
                 }
-
             } catch (error) {
                 if (!cancelled) {
                     console.error("Comments fetch error:", error);
@@ -58,7 +68,7 @@ function CommentSection({postId, onCommentCountChange}) {
                 }
             } finally {
                 if (!cancelled) {
-                    setIsLoading(false);
+                    setIsInitialLoading(false);
                 }
             }
         }
@@ -70,35 +80,39 @@ function CommentSection({postId, onCommentCountChange}) {
         };
     }, [postId, applyComments]);
 
-    const {parentComments, repliesByParent} =
-        useMemo(() => {
-            const parents = [];
-            const repliesMap = {};
+    const {parentComments, repliesByParent}
+        = useMemo(() => {
+        const parents = [];
+        const repliesMap = {};
 
-            comments.forEach((comment) => {
-                if (comment.parentCommentId == null) {
-                    parents.push(comment);
-                    return;
-                }
+        comments.forEach((comment) => {
+            if (comment.parentCommentId == null) {
+                parents.push(comment);
+                return;
+            }
 
-                const parentId = String(comment.parentCommentId);
+            const parentId = String(comment.parentCommentId);
 
-                if (!repliesMap[parentId]) {
-                    repliesMap[parentId] = [];
-                }
+            if (!repliesMap[parentId]) {
+                repliesMap[parentId] = [];
+            }
 
-                repliesMap[parentId].push(comment);
-            });
+            repliesMap[parentId].push(comment);
+        });
 
-            return {
-                parentComments: parents,
-                repliesByParent: repliesMap
-            };
-        }, [comments]);
+        return {
+            parentComments: parents,
+            repliesByParent: repliesMap
+        };
+    }, [comments]);
 
     async function handleCreateComment(content) {
+        if (isMutating) {
+            return false;
+        }
+
         try {
-            setIsSubmitting(true);
+            setIsMutating(true);
 
             await api.post(
                 `/api/v1/posts/${postId}/comments`,
@@ -107,7 +121,7 @@ function CommentSection({postId, onCommentCountChange}) {
                 }
             );
 
-            await loadComments();
+            await refreshComments();
 
             return true;
         } catch (error) {
@@ -116,11 +130,15 @@ function CommentSection({postId, onCommentCountChange}) {
 
             return false;
         } finally {
-            setIsSubmitting(false);
+            setIsMutating(false);
         }
     }
 
     async function handleReply(comment) {
+        if (isMutating) {
+            return;
+        }
+
         const content = window.prompt(
             `Reply to ${comment.nickname}:`
         );
@@ -132,7 +150,10 @@ function CommentSection({postId, onCommentCountChange}) {
         const parentCommentId = comment.parentCommentId != null
                 ? comment.parentCommentId
                 : comment.id;
+
         try {
+            setIsMutating(true);
+
             await api.post(
                 `/api/v1/posts/${postId}/comments`,
                 {
@@ -141,22 +162,29 @@ function CommentSection({postId, onCommentCountChange}) {
                 }
             );
 
-            await loadComments();
+            await refreshComments();
         } catch (error) {
             console.error("Adding reply error:", error);
             alert(error.message || "Failed to add a reply.");
+        } finally {
+            setIsMutating(false);
         }
     }
 
     async function handleEdit(comment) {
-        const newContent = window.prompt(
-            "Edit comment:", comment.content);
+        if (isMutating) {
+            return;
+        }
+
+        const newContent = window.prompt("Edit comment:", comment.content);
 
         if (!newContent?.trim()) {
             return;
         }
 
         try {
+            setIsMutating(true);
+
             await api.patch(
                 `/api/v1/posts/${postId}/comments/${comment.id}`,
                 {
@@ -164,82 +192,105 @@ function CommentSection({postId, onCommentCountChange}) {
                 }
             );
 
-            await loadComments();
-
+            await refreshComments();
         } catch (error) {
             console.error("Update comment error:", error);
             alert(error.message || "Failed to update comment.");
+        } finally {
+            setIsMutating(false);
         }
     }
 
     async function handleDelete(comment) {
+        if (isMutating) {
+            return;
+        }
+
         if (!window.confirm("Delete this comment?")) {
             return;
         }
 
         try {
+            setIsMutating(true);
+
             await api.delete(
                 `/api/v1/posts/${postId}/comments/${comment.id}`
             );
 
-            await loadComments();
-
+            await refreshComments();
         } catch (error) {
             console.error("Delete comment error:", error);
             alert(error.message || "Failed to delete comment.");
+        } finally {
+            setIsMutating(false);
         }
     }
+
+    const isCommentActionDisabled = isMutating || isRefreshing;
 
     return (
         <section className="comment-section">
             <CommentForm
                 onSubmit={handleCreateComment}
-                isSubmitting={isSubmitting}
+                isSubmitting={isCommentActionDisabled}
             />
 
             <div className="comment-list">
-                {isLoading && (
+                {isInitialLoading && (
                     <div className="comments-notice">
                         Loading comments...
                     </div>
                 )}
 
-                {!isLoading &&
-                    parentComments.length === 0 && (
+                {!isInitialLoading && parentComments.length === 0 && (
                         <div className="comments-notice">
                             No comments yet.
                         </div>
                     )}
 
-                {!isLoading &&
-                    parentComments.map((parentComment) => (
-                        <div
-                            className="comment-thread"
-                            key={parentComment.id}
-                        >
-                            <CommentItem
-                                comment={parentComment}
-                                isReply={false}
-                                onReply={handleReply}
-                                onEdit={handleEdit}
-                                onDelete={handleDelete}
-                            />
-
-                            {(repliesByParent[
-                                    String(parentComment.id)
-                                    ] || []
-                            ).map((reply) => (
+                {!isInitialLoading && parentComments.map(
+                        (parentComment) => (
+                            <div
+                                className="comment-thread"
+                                key={parentComment.id}
+                            >
                                 <CommentItem
-                                    key={reply.id}
-                                    comment={reply}
-                                    isReply
+                                    comment={parentComment}
+                                    isReply={false}
                                     onReply={handleReply}
                                     onEdit={handleEdit}
                                     onDelete={handleDelete}
+                                    disabled={
+                                        isCommentActionDisabled
+                                    }
                                 />
-                            ))}
+
+                                {(repliesByParent[
+                                        String(parentComment.id)
+                                        ] || []
+                                ).map((reply) => (
+                                    <CommentItem
+                                        key={reply.id}
+                                        comment={reply}
+                                        isReply
+                                        onReply={handleReply}
+                                        onEdit={handleEdit}
+                                        onDelete={handleDelete}
+                                        disabled={isCommentActionDisabled}
+                                    />
+                                ))}
+                            </div>
+                        )
+                    )}
+
+                {!isInitialLoading && isRefreshing && (
+                        <div
+                            className="comments-refreshing"
+                            aria-live="polite"
+                        >
+                            Updating comments...
                         </div>
-                    ))}
+                    )}
             </div>
         </section>
     );
