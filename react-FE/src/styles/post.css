@@ -5,18 +5,97 @@
 }
 
 .header-section {
-    position: sticky;
-    top: 120px;
-    height: 0;
-    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.post-search-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: stretch;
+}
+
+.post-search-input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 16px;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    outline: none;
+    transition:
+            background-color 0.2s,
+            box-shadow 0.2s;
+}
+
+.post-search-input::placeholder {
+    color: #777;
+}
+
+.post-search-input:focus {
+    box-shadow: 0 0 0 2px rgba(28, 28, 28, 0.12);
+}
+
+.post-search-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.search-post-btn,
+.reset-search-btn {
+    background-color: #ffffff;
+    color: #057aff;
+    border: 1px solid #057aff;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: bold;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+            background-color 0.2s,
+            color 0.2s,
+            transform 0.2s;
+}
+
+.search-post-btn:hover,
+.reset-search-btn:hover {
+    background-color: #057aff;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.search-post-btn:disabled,
+.reset-search-btn:disabled {
+    background-color: #ffffff;
+    color: #888;
+    border-color: #aaa;
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+}
+
+.search-result-info {
+    margin-left: 3px;
+    margin-bottom: 24px;
+    font-size: 14px;
 }
 
 .create-post-btn {
-    position: absolute;
-    left: calc(100% + 20px);
-    background-color: #f8f8f5;
-    color: #1c1c1c;
-    border: 1px solid #1c1c1c;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    background-color: #ffffff;
+    color: #057aff;
+    border: 1px solid #057aff;
     padding: 12px 24px;
     border-radius: 4px;
     font-size: 14px;
@@ -27,8 +106,8 @@
 }
 
 .create-post-btn:hover {
-    background-color: #1c1c1c;
-    color: #f8f8f5;
+    background-color: #057aff;
+    color: #ffffff;
     transform: translateY(-1px);
 }
 
@@ -50,15 +129,15 @@
 }
 
 .posts-empty {
-    background: #fafaf8;
-    border: 1px solid #d5d5cf;
+    background: #ffffff;
+    border: 1px solid #c4c4c4;
     border-radius: 8px;
     padding: 32px 16px;
 }
 
 .post-item {
-    background-color: #fafaf8;
-    border: 1px solid #d5d5cf;
+    background-color: #ffffff;
+    border: 1px solid #c4c4c4;
     border-radius: 4px;
     padding: 20px;
     width: 100%;
@@ -81,7 +160,7 @@
 .post-title {
     font-size: 18px;
     font-weight: 600;
-    color: #1c1c1c;
+    color: #000000;
     margin-bottom: 8px;
     cursor: pointer;
     transition: color 0.2s;
@@ -98,11 +177,11 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background-color: #d5d5cf;
+    background-color: #f7f7f7;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1c1c1c;
+    color: #000000;
     font-size: 12px;
     font-weight: bold;
     border: 1px solid transparent;
@@ -117,7 +196,7 @@
 
 .author-info {
     font-size: 13px;
-    color: #1c1c1c;
+    color: #000000;
 }
 
 .post-stats {

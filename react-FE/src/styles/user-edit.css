@@ -3,7 +3,7 @@
 }
 
 .signup-container {
-    background: #fafaf8;
+    background: #ffffff;
     padding: 40px;
     border-radius: 16px;
     box-shadow: 0 6px 20px rgba(20, 20, 20, 0.12);
@@ -14,7 +14,7 @@
 
 h1 {
     text-align: center;
-    color: #1c1c1c;
+    color: #000000;
     margin-bottom: 30px;
     font-size: 28px;
 }
@@ -37,8 +37,8 @@ h1 {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: #eeeeea;
-    border: 2px dashed #d5d5cf;
+    background: #f7f7f7;
+    border: 1px dashed #c4c4c4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,8 +47,8 @@ h1 {
 }
 
 .edit-profile-circle:hover {
-    background: #9a9a94;
-    border-color: #181818;
+    background: #98999a;
+    border-color: #1f2124;
 }
 
 .edit-profile-circle img {
@@ -83,7 +83,7 @@ h1 {
 label {
     display: block;
     margin-bottom: 8px;
-    color: #1c1c1c;
+    color: #000000;
     font-weight: bold;
 }
 
@@ -93,24 +93,24 @@ input[type="url"],
 textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #d5d5cf;
+    border: 1px solid #c4c4c4;
     border-radius: 5px;
     font-size: 14px;
     transition: border-color 0.3s;
-    background: #f8f8f5;
+    background: #ffffff;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus {
     outline: none;
-    border-color: #9a9a94;
+    border-color: #c4c4c4;
     box-shadow: 0 2px 8px rgba(20, 20, 20, 0.08);
 
 }
 
 input[readonly] {
-    background: #eeeeea;
+    background: #ffffff;
     cursor: not-allowed;
 }
 
@@ -131,25 +131,25 @@ input[readonly] {
 }
 
 .save-changes-btn {
-    background: #f8f8f5;
-    color: #1c1c1c;
-    border: 1px solid #1c1c1c;
+    background: #ffffff;
+    color: #057aff;
+    border: 1px solid #057aff;
 }
 
 .save-changes-btn:hover:not(:disabled) {
-    background: #1c1c1c;
-    color: #f8f8f5;
+    background: #057aff;
+    color: #ffffff;
 }
 
 .delete-acc-btn {
-    background: #f8f8f5;
-    color: #b42318;
-    border: 1px solid #d92d20;
+    background: #ffffff;
+    color: #D50032;
+    border: 1px solid #D50032;
 }
 
 .delete-acc-btn:hover:not(:disabled) {
-    background: #d92d20;
-    color: #fff;
+    background: #D50032;
+    color: #ffffff;
 }
 
 .save-changes-btn:disabled,
@@ -159,7 +159,7 @@ input[readonly] {
 }
 
 .error-message {
-    color: #dc3545;
+    color: #D50032;
     font-size: 12px;
     margin-top: 5px;
     display: none;
@@ -181,7 +181,7 @@ input[readonly] {
 }
 
 .password-match-indicator.nomatch {
-    color: #dc3545;
+    color: #D50032;
     display: block;
 }
 
