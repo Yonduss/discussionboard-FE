@@ -4,7 +4,7 @@ import { Link, useNavigate} from "react-router-dom";
 
 import api from "../api/api.js";
 import "../styles/auth.css";
-import mlbLogo from "../assets/MLB_logo.svg";
+import mlbLogo from "../images/MLB_logo.svg";
 
 function LoginPage() {
     const navigate = useNavigate();

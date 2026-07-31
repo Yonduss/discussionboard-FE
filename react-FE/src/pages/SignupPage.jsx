@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import api from "../api/api.js";
-import mlbLogo from "../assets/MLB_logo.svg";
+import mlbLogo from "../images/MLB_logo.svg";
 import "../styles/auth.css";
 
 function SignupPage() {
