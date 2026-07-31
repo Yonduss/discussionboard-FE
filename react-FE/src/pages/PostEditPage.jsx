@@ -5,6 +5,7 @@ import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import ImageUrlInputs from "../components/ImageUrlInputs.jsx";
 import { useAuth } from "../contexts/AuthContext.js";
+import { createClientId } from "../utils/createClientId.js";
 
 import "../styles/post-write.css";
 
@@ -53,11 +54,11 @@ function PostEditPage() {
                 const loadedImages =
                     post.postImageUrls?.length > 0
                         ? post.postImageUrls.map((url) => ({
-                            id: crypto.randomUUID(),
+                            id: createClientId("image"),
                             url
                         }))
                         : [{
-                                id: crypto.randomUUID(),
+                                id: createClientId("image"),
                                 url: ""
                             }
                         ];

@@ -1,3 +1,5 @@
+import { createClientId } from "../utils/createClientId.js";
+
 function ImageUrlInputs({
                             images,
                             setImages,
@@ -20,7 +22,7 @@ function ImageUrlInputs({
         setImages((previousImages) => [
             ...previousImages,
             {
-                id: crypto.randomUUID(),
+                id: createClientId("image"),
                 url: ""
             }
         ]);
@@ -35,7 +37,7 @@ function ImageUrlInputs({
             if (nextImages.length === 0) {
                 return [
                     {
-                        id: crypto.randomUUID(),
+                        id: createClientId("image"),
                         url: ""
                     }
                 ];

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import ImageUrlInputs from "../components/ImageUrlInputs.jsx";
+import { createClientId } from "../utils/createClientId.js";
 
 import "../styles/post-write.css";
 
@@ -13,8 +14,8 @@ function PostWritePage() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
-    const [images, setImages] = useState([{
-            id: crypto.randomUUID(),
+    const [images, setImages] = useState(() => [{
+            id: createClientId("image"),
             url: ""
         }]);
 
