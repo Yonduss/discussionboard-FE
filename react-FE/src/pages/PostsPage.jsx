@@ -176,6 +176,7 @@ function PostsPage() {
                     >
                         <input
                             type="search"
+                            maxLength={100}
                             className="post-search-input"
                             value={searchInput}
                             onChange={(event) =>

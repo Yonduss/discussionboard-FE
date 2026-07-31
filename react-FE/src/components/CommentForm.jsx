@@ -34,6 +34,7 @@ function CommentForm({ onSubmit, isSubmitting }) {
 
             <input
                 type="text"
+                maxLength={255}
                 id="commentInput"
                 placeholder="Enter comment here"
                 value={content}

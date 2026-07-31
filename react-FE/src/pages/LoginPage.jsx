@@ -91,6 +91,7 @@ function LoginPage() {
                         <label htmlFor="email"> Email </label>
                         <input
                             type="email"
+                            maxLength={255}
                             id="email"
                             name="email"
                             placeholder="Enter your email"
@@ -104,6 +105,8 @@ function LoginPage() {
                         <label htmlFor="password"> Password </label>
                         <input
                             type="password"
+                            minLength={8}
+                            maxLength={72}
                             id="password"
                             name="password"
                             placeholder="Enter your password"

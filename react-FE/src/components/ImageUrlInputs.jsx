@@ -19,13 +19,19 @@ function ImageUrlInputs({
     }
 
     function handleAddImage() {
-        setImages((previousImages) => [
-            ...previousImages,
-            {
-                id: createClientId("image"),
-                url: ""
+        setImages((previousImages) => {
+            if (previousImages.length >= 10) {
+                return previousImages;
             }
-        ]);
+
+            return [
+                ...previousImages,
+                {
+                    id: createClientId("image"),
+                    url: ""
+                }
+            ];
+        });
     }
 
     function handleRemoveImage(id) {
@@ -99,6 +105,7 @@ function ImageUrlInputs({
                     >
                         <input
                             type="url"
+                            maxLength={500}
                             value={image.url}
                             placeholder="Enter Image URL"
                             onChange={(event) =>
@@ -159,7 +166,7 @@ function ImageUrlInputs({
                 type="button"
                 id="addImageButton"
                 onClick={handleAddImage}
-                disabled={isSubmitting}
+                disabled={isSubmitting || images.length >= 10}
             >
                 Add image
             </button>

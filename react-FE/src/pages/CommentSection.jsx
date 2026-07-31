@@ -147,6 +147,13 @@ function CommentSection({
             return;
         }
 
+        const trimmedContent = content.trim();
+
+        if (trimmedContent.length > 255) {
+            alert("Comment must not exceed 255 characters.");
+            return;
+        }
+
         const parentCommentId = comment.parentCommentId != null
                 ? comment.parentCommentId
                 : comment.id;
@@ -157,7 +164,7 @@ function CommentSection({
             await api.post(
                 `/api/v1/posts/${postId}/comments`,
                 {
-                    content: content.trim(),
+                    content: trimmedContent,
                     parentCommentId
                 }
             );
@@ -182,13 +189,20 @@ function CommentSection({
             return;
         }
 
+        const trimmedContent = newContent.trim();
+
+        if (trimmedContent.length > 255) {
+            alert("Comment must not exceed 255 characters.");
+            return;
+        }
+
         try {
             setIsMutating(true);
 
             await api.patch(
                 `/api/v1/posts/${postId}/comments/${comment.id}`,
                 {
-                    content: newContent.trim()
+                    content: trimmedContent
                 }
             );
 

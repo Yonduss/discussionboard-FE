@@ -169,6 +169,7 @@ function UserEditForm({
 
                         <input
                             type="url"
+                            maxLength={255}
                             id="profileImageUrl"
                             name="profileImageUrl"
                             placeholder="Enter image URL and press Enter"
@@ -206,6 +207,7 @@ function UserEditForm({
 
                         <input
                             type="text"
+                            maxLength={50}
                             id="nickname"
                             placeholder="Enter your nickname"
                             value={nickname}

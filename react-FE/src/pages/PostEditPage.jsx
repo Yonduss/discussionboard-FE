@@ -155,6 +155,7 @@ function PostEditPage() {
 
                         <input
                             type="text"
+                            maxLength={255}
                             id="postTitle"
                             name="title"
                             placeholder="Enter title"
@@ -172,6 +173,7 @@ function PostEditPage() {
                         </label>
 
                         <textarea
+                            maxLength={10000}
                             id="postContent"
                             name="content"
                             rows="8"

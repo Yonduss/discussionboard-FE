@@ -81,6 +81,8 @@ function PasswordEditPage() {
 
                             <input
                                 type="password"
+                                minLength={8}
+                                maxLength={72}
                                 id="currentPassword"
                                 name="currentPassword"
                                 autoComplete="current-password"
@@ -101,6 +103,8 @@ function PasswordEditPage() {
 
                             <input
                                 type="password"
+                                minLength={8}
+                                maxLength={72}
                                 id="newPassword"
                                 name="newPassword"
                                 autoComplete="new-password"
@@ -123,6 +127,8 @@ function PasswordEditPage() {
 
                             <input
                                 type="password"
+                                minLength={8}
+                                maxLength={72}
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 autoComplete="new-password"

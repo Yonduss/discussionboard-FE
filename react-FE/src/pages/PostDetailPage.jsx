@@ -112,11 +112,18 @@ function PostDetailPage() {
             return;
         }
 
+        const trimmedReason = reason.trim();
+
+        if (trimmedReason.length > 255) {
+            alert("Report reason must not exceed 255 characters.");
+            return;
+        }
+
         try {
             await api.post(
                 `/api/v1/posts/${postId}/reports`,
                 {
-                    reason: reason.trim()
+                    reason: trimmedReason
                 }
             );
 

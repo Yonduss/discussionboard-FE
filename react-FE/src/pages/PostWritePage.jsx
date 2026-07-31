@@ -84,6 +84,7 @@ function PostWritePage() {
 
                         <input
                             type="text"
+                            maxLength={255}
                             id="postTitle"
                             name="title"
                             placeholder="Enter title"
@@ -102,6 +103,7 @@ function PostWritePage() {
                         </label>
 
                         <textarea
+                            maxLength={10000}
                             id="postContent"
                             name="content"
                             rows="8"

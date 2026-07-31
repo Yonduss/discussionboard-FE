@@ -174,6 +174,7 @@ function SignupPage() {
                             <label htmlFor="profileImageUrl">Profile Image URL</label>
                             <input
                                 type="url"
+                                maxLength={255}
                                 id="profileImageUrl"
                                 name="profileImageUrl"
                                 placeholder="Enter image URL and press Enter"
@@ -191,6 +192,7 @@ function SignupPage() {
                             <label htmlFor="email">Email</label>
                             <input
                                 type="email"
+                                maxLength={255}
                                 id="email"
                                 name="email"
                                 autoComplete="email"
@@ -215,6 +217,8 @@ function SignupPage() {
                             <label htmlFor="password">Password</label>
                             <input
                                 type="password"
+                                minLength={8}
+                                maxLength={72}
                                 id="password"
                                 name="password"
                                 autoComplete="new-password"
@@ -239,6 +243,8 @@ function SignupPage() {
                             <label htmlFor="confirmPassword">Confirm Password</label>
                             <input
                                 type="password"
+                                minLength={8}
+                                maxLength={72}
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 autoComplete="new-password"
@@ -266,6 +272,7 @@ function SignupPage() {
                             <label htmlFor="nickname">Nickname</label>
                             <input
                                 type="text"
+                                maxLength={50}
                                 id="nickname"
                                 name="nickname"
                                 autoComplete="nickname"
