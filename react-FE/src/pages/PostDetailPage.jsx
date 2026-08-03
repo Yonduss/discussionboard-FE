@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api, { formatDate } from "../api/api.js";
 import { useAuth } from "../contexts/AuthContext.js";
 import Header from "../components/Header.jsx";
+import TextInputModal from "../components/TextInputModal.jsx";
 import CommentSection from "../pages/CommentSection.jsx";
 
 import "../styles/post-detail.css";
@@ -15,6 +16,8 @@ function PostDetailPage() {
     const [post, setPost] = useState(null);
     const [commentCount,setCommentCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+    const [isReporting, setIsReporting] = useState(false);
 
     useEffect(() => {
         async function initializePage() {
@@ -103,35 +106,39 @@ function PostDetailPage() {
         }
     }
 
-    async function handleReportPost() {
-        const reason = window.prompt(
-            "Please enter the reason for reporting this post."
-        );
+    function handleOpenReportModal() {
+        setIsReportModalOpen(true);
+    }
 
-        if (!reason?.trim()) {
-            return;
+    function handleCloseReportModal() {
+        if (!isReporting) {
+            setIsReportModalOpen(false);
         }
+    }
 
-        const trimmedReason = reason.trim();
-
-        if (trimmedReason.length > 255) {
-            alert("Report reason must not exceed 255 characters.");
+    async function handleReportPost(reason) {
+        if (isReporting) {
             return;
         }
 
         try {
+            setIsReporting(true);
+
             await api.post(
                 `/api/v1/posts/${postId}/reports`,
                 {
-                    reason: trimmedReason
+                    reason
                 }
             );
 
+            setIsReportModalOpen(false);
             alert("Post reported successfully.");
             navigate("/posts", { replace: true });
         } catch (error) {
             console.error("Report post error:", error);
             alert(error.message || "Failed to report post.");
+        } finally {
+            setIsReporting(false);
         }
     }
 
@@ -262,7 +269,8 @@ function PostDetailPage() {
                     <button
                         type="button"
                         className="report-button"
-                        onClick={handleReportPost}
+                        onClick={handleOpenReportModal}
+                        disabled={isReporting}
                         aria-label="Report post"
                     >
                         🚨
@@ -274,6 +282,20 @@ function PostDetailPage() {
                     onCommentCountChange={setCommentCount}
                 />
             </main>
+
+            <TextInputModal
+                isOpen={isReportModalOpen}
+                title="Report post"
+                description="Please enter the reason for reporting this post."
+                placeholder="Enter report reason"
+                confirmText="Report"
+                confirmVariant="danger"
+                maxLength={255}
+                isSubmitting={isReporting}
+                emptyMessage="Report reason is required."
+                onConfirm={handleReportPost}
+                onCancel={handleCloseReportModal}
+            />
         </>
     );
 }

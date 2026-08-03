@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import api from "../api/api.js";
 import CommentForm from "../components/CommentForm.jsx";
+import TextInputModal from "../components/TextInputModal.jsx";
 import CommentItem from "./CommentItem.jsx";
 
 function CommentSection({
@@ -15,6 +16,8 @@ function CommentSection({
     const [isRefreshing, setIsRefreshing] = useState(false);
 
     const [isMutating, setIsMutating] = useState(false);
+
+    const [commentModal, setCommentModal] = useState(null);
 
     const applyComments = useCallback(
         (result) => {
@@ -134,82 +137,81 @@ function CommentSection({
         }
     }
 
-    async function handleReply(comment) {
+    function handleReply(comment) {
         if (isMutating) {
             return;
         }
 
-        const content = window.prompt(
-            `Reply to ${comment.nickname}:`
-        );
+        setCommentModal({
+            type: "reply",
+            comment
+        });
+    }
 
-        if (!content?.trim()) {
+    function handleEdit(comment) {
+        if (isMutating) {
             return;
         }
 
-        const trimmedContent = content.trim();
+        setCommentModal({
+            type: "edit",
+            comment
+        });
+    }
 
-        if (trimmedContent.length > 255) {
-            alert("Comment must not exceed 255 characters.");
-            return;
-        }
-
-        const parentCommentId = comment.parentCommentId != null
-                ? comment.parentCommentId
-                : comment.id;
-
-        try {
-            setIsMutating(true);
-
-            await api.post(
-                `/api/v1/posts/${postId}/comments`,
-                {
-                    content: trimmedContent,
-                    parentCommentId
-                }
-            );
-
-            await refreshComments();
-        } catch (error) {
-            console.error("Adding reply error:", error);
-            alert(error.message || "Failed to add a reply.");
-        } finally {
-            setIsMutating(false);
+    function handleCloseCommentModal() {
+        if (!isMutating) {
+            setCommentModal(null);
         }
     }
 
-    async function handleEdit(comment) {
-        if (isMutating) {
+    async function handleConfirmCommentModal(content) {
+        if (isMutating || !commentModal) {
             return;
         }
 
-        const newContent = window.prompt("Edit comment:", comment.content);
-
-        if (!newContent?.trim()) {
-            return;
-        }
-
-        const trimmedContent = newContent.trim();
-
-        if (trimmedContent.length > 255) {
-            alert("Comment must not exceed 255 characters.");
-            return;
-        }
+        const { type, comment } = commentModal;
 
         try {
             setIsMutating(true);
 
-            await api.patch(
-                `/api/v1/posts/${postId}/comments/${comment.id}`,
-                {
-                    content: trimmedContent
-                }
-            );
+            if (type === "reply") {
+                const parentCommentId = comment.parentCommentId != null
+                    ? comment.parentCommentId
+                    : comment.id;
+
+                await api.post(
+                    `/api/v1/posts/${postId}/comments`,
+                    {
+                        content,
+                        parentCommentId
+                    }
+                );
+            } else {
+                await api.patch(
+                    `/api/v1/posts/${postId}/comments/${comment.id}`,
+                    {
+                        content
+                    }
+                );
+            }
 
             await refreshComments();
+            setCommentModal(null);
         } catch (error) {
-            console.error("Update comment error:", error);
-            alert(error.message || "Failed to update comment.");
+            const isReply = type === "reply";
+
+            console.error(
+                isReply ? "Adding reply error:" : "Update comment error:",
+                error
+            );
+            alert(
+                error.message || (
+                    isReply
+                        ? "Failed to add a reply."
+                        : "Failed to update comment."
+                )
+            );
         } finally {
             setIsMutating(false);
         }
@@ -306,6 +308,34 @@ function CommentSection({
                         </div>
                     )}
             </div>
+
+            <TextInputModal
+                isOpen={commentModal != null}
+                title={
+                    commentModal?.type === "reply"
+                        ? "Reply to comment"
+                        : "Edit comment"
+                }
+                description={
+                    commentModal?.type === "reply"
+                        ? `Reply to ${commentModal.comment.nickname}.`
+                        : "Edit your comment."
+                }
+                initialValue={
+                    commentModal?.type === "edit"
+                        ? commentModal.comment.content
+                        : ""
+                }
+                placeholder="Enter comment"
+                confirmText={
+                    commentModal?.type === "reply" ? "Reply" : "Save"
+                }
+                maxLength={255}
+                isSubmitting={isMutating}
+                emptyMessage="Comment is required."
+                onConfirm={handleConfirmCommentModal}
+                onCancel={handleCloseCommentModal}
+            />
         </section>
     );
 }
