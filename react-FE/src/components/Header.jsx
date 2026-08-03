@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import api, { clearTokens } from "../api/api.js";
 import { useAuth } from "../contexts/AuthContext.js";
 import mlbLogo from "../images/MLB_logo.svg";
 
@@ -11,18 +12,30 @@ function Header() {
     const { currentUser, setCurrentUser, loading } = useAuth();
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
 
     function handleProfileClick(event) {
         event.stopPropagation();
         setIsDropdownOpen((previous) => !previous);
     }
 
-    function handleLogout() {
-        localStorage.clear();
-        setCurrentUser(null);
-        navigate("/login", {
-            replace: true
-        });
+    async function handleLogout() {
+        if (isLoggingOut) {
+            return;
+        }
+
+        try {
+            setIsLoggingOut(true);
+            await api.post("/api/v1/auth/logout");
+        } catch (error) {
+            console.error("Logout error:", error);
+        } finally {
+            clearTokens();
+            setCurrentUser(null);
+            navigate("/login", {
+                replace: true
+            });
+        }
     }
 
     useEffect(() => {
@@ -91,8 +104,9 @@ function Header() {
                         type="button"
                         className="logout-button"
                         onClick={handleLogout}
+                        disabled={isLoggingOut}
                     >
-                        Logout
+                        {isLoggingOut ? "Logging out..." : "Logout"}
                     </button>
                 </div>
             </div>

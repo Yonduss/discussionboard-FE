@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import api from "../api/api.js";
+import api, { clearTokens } from "../api/api.js";
 import Header from "../components/Header.jsx";
+import { useAuth } from "../contexts/AuthContext.js";
 
 import "../styles/auth.css";
 import "../styles/user-edit.css";
 
 function PasswordEditPage() {
     const navigate = useNavigate();
+    const { setCurrentUser } = useAuth();
 
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -48,9 +50,12 @@ function PasswordEditPage() {
                 }
             );
 
-            alert("Password changed successfully.");
+            clearTokens();
+            setCurrentUser(null);
 
-            navigate("/posts", {
+            alert("Password changed successfully. Please log in again.");
+
+            navigate("/login", {
                 replace: true
             });
 
