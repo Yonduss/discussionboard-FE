@@ -1,0 +1,405 @@
+.my-profile-page {
+    width: 1180px;
+    min-width: 1080px;
+    margin: 36px auto 64px;
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+}
+
+.profile-summary-card,
+.profile-dashboard-card {
+    background: #ffffff;
+    border: 1px solid #d5d8de;
+    border-radius: 14px;
+    box-shadow: 0 8px 26px rgba(0, 45, 114, 0.08);
+}
+
+.profile-summary-card {
+    position: sticky;
+    top: 128px;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-page-avatar {
+    width: 128px;
+    height: 128px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid #c4c4c4;
+    border-radius: 50%;
+    background: #edf2f8;
+    color: #002d72;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.profile-page-avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.profile-summary-text {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.profile-summary-text h1 {
+    margin: 0;
+    color: #111827;
+    font-size: 24px;
+    overflow-wrap: anywhere;
+}
+
+.profile-summary-text p {
+    margin: 7px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.favorite-team-badge {
+    width: 100%;
+    margin-top: 24px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #ccd8e8;
+    border-radius: 10px;
+    background: #f5f8fc;
+}
+
+.favorite-team-badge img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+.favorite-team-badge div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.favorite-team-badge span {
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.favorite-team-badge strong {
+    color: #002d72;
+    font-size: 14px;
+}
+
+.profile-account-actions {
+    width: 100%;
+    margin-top: 26px;
+    padding-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid #e2e5e9;
+}
+
+.profile-account-actions a {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #002d72;
+    border-radius: 7px;
+    color: #002d72;
+    background: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.profile-account-actions a:hover {
+    color: #ffffff;
+    background: #002d72;
+    transform: translateY(-1px);
+}
+
+.profile-account-actions a.danger {
+    color: #d50032;
+    border-color: #d50032;
+}
+
+.profile-account-actions a.danger:hover {
+    color: #ffffff;
+    background: #d50032;
+}
+
+.profile-dashboard {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.profile-dashboard-card {
+    padding: 24px;
+}
+
+.profile-card-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.profile-card-heading h2 {
+    margin: 4px 0 0;
+    color: #111827;
+    font-size: 22px;
+}
+
+.profile-card-eyebrow {
+    color: #d50032;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.profile-image-source-label,
+.activity-total {
+    padding: 7px 10px;
+    border-radius: 999px;
+    color: #002d72;
+    background: #eaf0f8;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.favorite-team-controls {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.favorite-team-controls label {
+    color: #374151;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.favorite-team-select-row {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.favorite-team-select-row select {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 38px 11px 13px;
+    border: 1px solid #b8c0cb;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #111827;
+    font: inherit;
+    outline: none;
+}
+
+.favorite-team-select-row select:focus {
+    border-color: #002d72;
+    box-shadow: 0 0 0 3px rgba(0, 45, 114, 0.12);
+}
+
+.profile-preference-button {
+    padding: 10px 14px;
+    border: 1px solid #002d72;
+    border-radius: 7px;
+    color: #002d72;
+    background: #ffffff;
+    font-weight: 700;
+}
+
+.profile-preference-button:hover:not(:disabled) {
+    color: #ffffff;
+    background: #002d72;
+}
+
+.selected-team-panel {
+    margin-top: 20px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-left: 4px solid #002d72;
+    border-radius: 8px;
+    background: #f5f8fc;
+}
+
+.selected-team-panel img {
+    width: 78px;
+    height: 78px;
+    object-fit: contain;
+}
+
+.selected-team-panel div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.selected-team-panel span {
+    color: #d50032;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.selected-team-panel strong {
+    color: #002d72;
+    font-size: 20px;
+}
+
+.selected-team-panel p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.profile-activity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 24px;
+}
+
+.activity-card {
+    min-width: 0;
+}
+
+.profile-activity-list {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e2e5e9;
+}
+
+.profile-activity-item {
+    min-width: 0;
+    padding: 15px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid #e2e5e9;
+    color: inherit;
+    text-decoration: none;
+}
+
+.profile-activity-item:hover strong {
+    color: #002d72;
+}
+
+.profile-activity-item > div:first-child {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profile-activity-item strong {
+    overflow: hidden;
+    color: #20242a;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.profile-activity-item span {
+    color: #777f89;
+    font-size: 11px;
+}
+
+.profile-activity-item.comment p {
+    margin: 0;
+    display: -webkit-box;
+    overflow: hidden;
+    color: #4b5563;
+    font-size: 13px;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.profile-activity-stats {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.profile-empty-message,
+.profile-inline-error {
+    margin: 18px 0 0;
+    padding: 28px 14px;
+    border: 1px dashed #ccd1d8;
+    border-radius: 8px;
+    color: #6b7280;
+    background: #fafbfc;
+    font-size: 13px;
+    text-align: center;
+}
+
+.profile-inline-error {
+    color: #b00029;
+    border-color: #e8a9b8;
+    background: #fff5f7;
+}
+
+.profile-pagination {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.profile-pagination button {
+    padding: 7px 10px;
+    border: 1px solid #b8c0cb;
+    border-radius: 6px;
+    color: #002d72;
+    background: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.profile-pagination button:hover:not(:disabled) {
+    color: #ffffff;
+    background: #002d72;
+    border-color: #002d72;
+}
+
+.profile-pagination button:disabled,
+.profile-preference-button:disabled,
+.favorite-team-select-row select:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.profile-pagination span {
+    color: #626975;
+    font-size: 12px;
+}

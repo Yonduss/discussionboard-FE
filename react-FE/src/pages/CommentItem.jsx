@@ -1,5 +1,6 @@
 import { formatDate } from "../api/api.js";
 import { useAuth } from "../contexts/AuthContext.js";
+import emptyProfileImage from "../images/empty-profile-image.png";
 
 function CommentItem({
                          comment,

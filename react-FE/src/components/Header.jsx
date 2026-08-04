@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import api, { clearTokens } from "../api/api.js";
 import { useAuth } from "../contexts/AuthContext.js";
+import emptyProfileImage from "../images/empty-profile-image.png";
 import mlbLogo from "../images/MLB_logo.svg";
 
 function Header() {
@@ -92,6 +93,10 @@ function Header() {
                         isDropdownOpen ? "active" : ""
                     }`}
                 >
+                    <Link to="/users/me">
+                        My Profile
+                    </Link>
+
                     <Link to="/users/edit">
                         Edit Profile
                     </Link>

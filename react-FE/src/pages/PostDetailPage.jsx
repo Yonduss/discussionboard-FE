@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api, { formatDate } from "../api/api.js";
 import { useAuth } from "../contexts/AuthContext.js";
+import emptyProfileImage from "../images/empty-profile-image.png";
 import Header from "../components/Header.jsx";
 import TextInputModal from "../components/TextInputModal.jsx";
 import CommentSection from "../pages/CommentSection.jsx";

@@ -8,6 +8,7 @@ import PostWritePage from "./pages/PostWritePage.jsx";
 import PostEditPage from "./pages/PostEditPage.jsx";
 import UserEditPage from "./pages/UserEditPage.jsx";
 import PasswordEditPage from "./pages/PasswordEditPage.jsx";
+import MyProfilePage from "./pages/MyProfilePage.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 
 function App() {
@@ -46,6 +47,11 @@ function App() {
                   <Route
                       path="/posts/:postId/edit"
                       element={<PostEditPage />}
+                  />
+
+                  <Route
+                      path="/users/me"
+                      element={<MyProfilePage />}
                   />
 
                   <Route

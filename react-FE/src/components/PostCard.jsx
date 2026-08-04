@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatDate } from "../api/api.js";
+import emptyProfileImage from "../images/empty-profile-image.png";
 
 function PostCard({ post }) {
     const displayedTime = post.edited && post.updatedAt
