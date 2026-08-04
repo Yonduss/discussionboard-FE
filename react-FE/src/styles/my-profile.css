@@ -11,7 +11,7 @@
 .profile-summary-card,
 .profile-dashboard-card {
     background: #ffffff;
-    border: 1px solid #d5d8de;
+    border: 1px solid #c4c4c4;
     border-radius: 14px;
     box-shadow: 0 8px 26px rgba(0, 45, 114, 0.08);
 }
@@ -33,7 +33,7 @@
     overflow: hidden;
     border: 1px solid #c4c4c4;
     border-radius: 50%;
-    background: #edf2f8;
+    background: #f7f7f7;
     color: #002d72;
     font-size: 42px;
     font-weight: 800;
