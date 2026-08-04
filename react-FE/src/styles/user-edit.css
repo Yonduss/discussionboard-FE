@@ -132,12 +132,12 @@ input[readonly] {
 
 .save-changes-btn {
     background: #ffffff;
-    color: #057aff;
-    border: 1px solid #057aff;
+    color: #002d72;
+    border: 1px solid #002d72;
 }
 
 .save-changes-btn:hover:not(:disabled) {
-    background: #057aff;
+    background: #002d72;
     color: #ffffff;
 }
 

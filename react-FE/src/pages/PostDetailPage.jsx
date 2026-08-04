@@ -184,16 +184,10 @@ function PostDetailPage() {
 
                         <div className="author-info">
                             <div className="author-circle">
-                                {post.profileImageUrl ? (
-                                    <img
-                                        src={post.profileImageUrl}
-                                        alt={`${post.nickname} profile`}
-                                    />
-                                ) : (
-                                    post.nickname
-                                        ?.charAt(0)
-                                        .toUpperCase()
-                                )}
+                                <img
+                                    src={post.profileImageUrl || emptyProfileImage}
+                                    alt={`${post.nickname} profile`}
+                                />
                             </div>
 
                             <div className="author-details">

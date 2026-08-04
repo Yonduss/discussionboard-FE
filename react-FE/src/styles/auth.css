@@ -41,8 +41,8 @@
     width: 100%;
     padding: 10px;
     background-color: #ffffff;
-    color: #057aff;
-    border: 1px solid #057aff;
+    color: #002d72;
+    border: 1px solid #002d72;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
@@ -50,20 +50,20 @@
 }
 
 .login-container button:hover {
-    background-color: #057aff;
+    background-color: #002d72;
     color: #ffffff;
     transform: translateY(-1px);
 }
 
 #signup-button {
     margin-top: 12px;
-    color: #057aff;
+    color: #002d72;
     font-weight: bold;
     background: #ffffff;
 }
 
 #signup-button:hover {
-    background-color: #057aff;
+    background-color: #002d72;
     color: #ffffff;
     transform: translateY(-1px);
 }
@@ -200,31 +200,31 @@ input[type="url"]:focus {
     width: 100%;
     padding: 10px;
     background-color: #ffffff;
-    color: #057aff;
-    border: 1px solid #057aff;
+    color: #002d72;
+    border: 1px solid #002d72;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
 }
 
 .signup-btn:hover {
-    background-color: #057aff;
+    background-color: #002d72;
     color: #ffffff;
     transform: translateY(-1px);
 }
 
 .login-btn {
-    color: #057aff;
+    color: #002d72;
     font-weight: bold;
     background: #ffffff;
-    border: 1px solid #057aff;
+    border: 1px solid #002d72;
     width: 100%;
     padding: 10px;
     border-radius: 4px;
 }
 
 .login-btn:hover {
-    background-color: #057aff;
+    background-color: #002d72;
     color: #ffffff;
     transform: translateY(-1px);
 }

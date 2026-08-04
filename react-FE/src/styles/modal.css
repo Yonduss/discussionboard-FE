@@ -106,14 +106,14 @@
 }
 
 .modal-confirm-button {
-    color: #057aff;
+    color: #002d72;
     background: #ffffff;
-    border: 1px solid #057aff;
+    border: 1px solid #002d72;
 }
 
 .modal-confirm-button:hover:not(:disabled) {
     color: #ffffff;
-    background: #057aff;
+    background: #002d72;
     transform: translateY(-1px);
 }
 

@@ -12,11 +12,11 @@ function UserEditForm({
     );
 
     const [profileImageUrl, setProfileImageUrl] = useState(
-        currentUser.profileImageUrl || ""
+        currentUser.personalProfileImageUrl ?? currentUser.profileImageUrl ?? ""
     );
 
     const [profilePreviewUrl, setProfilePreviewUrl] = useState(
-        currentUser.profileImageUrl || ""
+        currentUser.personalProfileImageUrl ?? currentUser.profileImageUrl ?? ""
     );
 
     const [isProfileUrlBoxOpen, setIsProfileUrlBoxOpen] = useState(false);

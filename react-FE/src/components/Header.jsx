@@ -77,13 +77,13 @@ function Header() {
                     aria-label="Open profile menu"
                 >
                     {!loading && (
-                        currentUser?.profileImageUrl ? (
+                        currentUser ? (
                             <img
-                                src={currentUser.profileImageUrl}
+                                src={currentUser.profileImageUrl || emptyProfileImage}
                                 alt="Profile"
                             />
                         ) : (
-                            currentUser?.nickname?.charAt(0).toUpperCase() || "👤"
+                            ""
                         )
                     )}
                 </button>

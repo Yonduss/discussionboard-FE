@@ -43,9 +43,9 @@
 }
 
 .post-detail .post-actions button {
-  border: 1px solid #057aff;
+  border: 1px solid #002d72;
   background: #ffffff;
-  color: #057aff;
+  color: #002d72;
   padding: 10px 16px;
   border-radius: 10px;
   cursor: pointer;
@@ -55,7 +55,7 @@
 }
 
 .post-detail .post-actions button:hover {
-  background: #057aff;
+  background: #002d72;
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -246,16 +246,16 @@
 
 .comment-input-row button {
   background: #ffffff;
-  color: #057aff;
+  color: #002d72;
   padding:10px 14px;
-  border: 1px solid #057aff;
+  border: 1px solid #002d72;
   border-radius:8px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .comment-input-row button:hover {
-  background: #057aff;
+  background: #002d72;
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -297,9 +297,9 @@ input[type="text"],  textarea {
 }
 
 .post-detail .comment-actions button {
-  border: 1px solid #057aff;
+  border: 1px solid #002d72;
   background: #ffffff;
-  color: #057aff;
+  color: #002d72;
   padding: 8px 12px;
   border-radius: 10px;
   cursor: pointer;
@@ -307,7 +307,7 @@ input[type="text"],  textarea {
 }
 
 .post-detail .comment-actions button:hover {
-  background: #057aff;
+  background: #002d72;
   color: #ffffff;
   transform: translateY(-1px);
 }

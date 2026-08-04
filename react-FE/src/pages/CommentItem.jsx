@@ -30,16 +30,10 @@ function CommentItem({
         >
             <div className="comment-header">
                 <div className="comment-author-circle">
-                    {comment.profileImageUrl ? (
-                        <img
-                            src={comment.profileImageUrl}
-                            alt={`${comment.nickname} profile`}
-                        />
-                    ) : (
-                        comment.nickname
-                            ?.charAt(0)
-                            .toUpperCase()
-                    )}
+                    <img
+                        src={comment.profileImageUrl || emptyProfileImage}
+                        alt={`${comment.nickname} profile`}
+                    />
                 </div>
 
                 <div className="comment-author-info">

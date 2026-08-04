@@ -51,8 +51,8 @@
 .search-post-btn,
 .reset-search-btn {
     background-color: #ffffff;
-    color: #057aff;
-    border: 1px solid #057aff;
+    color: #002d72;
+    border: 1px solid #002d72;
     padding: 12px 24px;
     border-radius: 4px;
     font-size: 14px;
@@ -68,7 +68,7 @@
 
 .search-post-btn:hover,
 .reset-search-btn:hover {
-    background-color: #057aff;
+    background-color: #002d72;
     color: #ffffff;
     transform: translateY(-1px);
 }
@@ -94,8 +94,8 @@
     right: 40px;
     bottom: 40px;
     background-color: #ffffff;
-    color: #057aff;
-    border: 1px solid #057aff;
+    color: #002d72;
+    border: 1px solid #002d72;
     padding: 12px 24px;
     border-radius: 4px;
     font-size: 14px;
@@ -106,7 +106,7 @@
 }
 
 .create-post-btn:hover {
-    background-color: #057aff;
+    background-color: #002d72;
     color: #ffffff;
     transform: translateY(-1px);
 }

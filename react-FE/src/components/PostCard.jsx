@@ -27,16 +27,10 @@ function PostCard({ post }) {
 
             <div className="post-author">
                 <div className="author-circle">
-                    {post.profileImageUrl ? (
-                        <img
-                            src={post.profileImageUrl}
-                            alt={`${post.nickname || "User"} profile`}
-                        />
-                    ) : (
-                        post.nickname
-                            ?.charAt(0)
-                            .toUpperCase() || "👤"
-                    )}
+                    <img
+                        src={post.profileImageUrl || emptyProfileImage}
+                        alt={`${post.nickname || "User"} profile`}
+                    />
                 </div>
 
                 <div className="author-info">
