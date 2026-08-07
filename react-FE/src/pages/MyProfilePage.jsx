@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import api, { formatDate } from "../api/api.js";
+import FavoriteTeamGamesCard from "../components/FavoriteTeamGamesCard.jsx";
 import Header from "../components/Header.jsx";
 import ProfileImageChoiceModal from "../components/ProfileImageChoiceModal.jsx";
 import { useAuth } from "../contexts/AuthContext.js";
@@ -248,7 +249,8 @@ function MyProfilePage() {
                 </aside>
 
                 <div className="profile-dashboard">
-                    <section className="profile-dashboard-card favorite-team-card">
+                    <div className="profile-overview-grid">
+                        <section className="profile-dashboard-card favorite-team-card">
                         <div className="profile-card-heading">
                             <div>
                                 <span className="profile-card-eyebrow">TEAM PREFERENCE</span>
@@ -317,7 +319,13 @@ function MyProfilePage() {
                                 {teamError}
                             </p>
                         )}
-                    </section>
+                        </section>
+
+                        <FavoriteTeamGamesCard
+                            key={currentUser.favoriteTeam || "no-favorite-team"}
+                            favoriteTeamCode={currentUser.favoriteTeam}
+                        />
+                    </div>
 
                     <div className="profile-activity-grid">
                         <section className="profile-dashboard-card activity-card">

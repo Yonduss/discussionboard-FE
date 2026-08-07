@@ -155,6 +155,18 @@
     padding: 24px;
 }
 
+.profile-overview-grid,
+.profile-activity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 24px;
+}
+
+.profile-overview-grid > * {
+    min-width: 0;
+}
+
 .profile-card-heading {
     display: flex;
     align-items: flex-start;
@@ -200,6 +212,7 @@
 
 .favorite-team-select-row {
     display: flex;
+    flex-direction: column;
     align-items: stretch;
     gap: 10px;
 }
@@ -222,6 +235,7 @@
 }
 
 .profile-preference-button {
+    align-self: flex-end;
     padding: 10px 14px;
     border: 1px solid #002d72;
     border-radius: 7px;
@@ -236,7 +250,7 @@
 }
 
 .selected-team-panel {
-    margin-top: 20px;
+    margin-top: 32px;
     padding: 18px 20px;
     display: flex;
     align-items: center;
@@ -278,10 +292,176 @@
 }
 
 .profile-activity-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
-    gap: 24px;
+}
+
+.favorite-games-card {
+    min-height: 550px;
+    overflow: hidden;
+    perspective: 1200px;
+}
+
+.favorite-games-flipper {
+    position: relative;
+    min-height: 500px;
+    transform-style: preserve-3d;
+    transition: transform 0.55s ease;
+}
+
+.favorite-games-flipper.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.favorite-games-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    pointer-events: none;
+}
+
+.favorite-games-face.front,
+.favorite-games-flipper.is-flipped .favorite-games-face.back {
+    pointer-events: auto;
+}
+
+.favorite-games-flipper.is-flipped .favorite-games-face.front {
+    pointer-events: none;
+}
+
+.favorite-games-face.back {
+    transform: rotateY(180deg);
+}
+
+.favorite-games-toggle,
+.favorite-games-retry {
+    padding: 8px 12px;
+    border: 1px solid #002d72;
+    border-radius: 7px;
+    color: #002d72;
+    background: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.favorite-games-toggle:hover,
+.favorite-games-retry:hover {
+    color: #ffffff;
+    background: #002d72;
+}
+
+.favorite-games-retry {
+    margin: 14px auto 0;
+    display: block;
+}
+
+.favorite-games-list {
+    margin-top: 6px;
+    border-top: 1px solid #e2e5e9;
+}
+
+.favorite-games-team-labels {
+    margin-top: 16px;
+    padding: 0 2px;
+    display: flex;
+    justify-content: space-between;
+    color: #6b7280;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.favorite-game-row {
+    padding: 11px 0;
+    border-bottom: 1px solid #e2e5e9;
+}
+
+.favorite-game-matchup,
+.favorite-game-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.favorite-game-team {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.favorite-game-team:last-child {
+    justify-content: flex-end;
+}
+
+.favorite-game-team img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.favorite-game-team strong {
+    color: #1f2937;
+    font-size: 13px;
+}
+
+.favorite-game-team > span {
+    color: #002d72;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.favorite-game-at {
+    color: #8a929d;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.favorite-game-meta {
+    margin-top: 7px;
+}
+
+.favorite-game-meta time,
+.favorite-game-venue {
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.favorite-game-status {
+    padding: 3px 7px;
+    border-radius: 999px;
+    color: #002d72;
+    background: #eaf0f8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.favorite-game-status.win {
+    color: #ffffff;
+    background: #002d72;
+}
+
+.favorite-game-status.loss,
+.favorite-game-status.live {
+    color: #ffffff;
+    background: #d50032;
+}
+
+.favorite-game-venue {
+    margin: 4px 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .favorite-games-flipper {
+        transition: none;
+    }
 }
 
 .activity-card {
