@@ -1,12 +1,14 @@
 import { useState } from "react";
 
 import api from "../api/api.js";
+import { useModal } from "../contexts/ModalContext.js";
 
 function UserEditForm({
                           currentUser,
                           setCurrentUser,
                           navigate
                       }) {
+    const { showMessage, showConfirm } = useModal();
     const [nickname, setNickname] = useState(
         currentUser.nickname
     );
@@ -76,7 +78,9 @@ function UserEditForm({
 
             setCurrentUser(result.data);
 
-            alert("Profile updated successfully.");
+            await showMessage("Profile updated successfully.", {
+                variant: "success"
+            });
 
             navigate("/posts", {
                 replace: true
@@ -84,7 +88,9 @@ function UserEditForm({
         } catch (error) {
             console.error("Update profile error:", error);
 
-            alert(error.message || "Failed to update profile.");
+            await showMessage(error.message || "Failed to update profile.", {
+                variant: "error"
+            });
         } finally {
             setIsSaving(false);
         }
@@ -95,7 +101,14 @@ function UserEditForm({
             return;
         }
 
-        const confirmed = window.confirm("Are you sure you want to delete your account?");
+        const confirmed = await showConfirm(
+            "Are you sure you want to delete your account? This cannot be undone.",
+            {
+                title: "Delete account",
+                confirmText: "Delete Account",
+                confirmVariant: "danger"
+            }
+        );
 
         if (!confirmed) {
             return;
@@ -109,14 +122,18 @@ function UserEditForm({
             localStorage.clear();
             setCurrentUser(null);
 
-            alert("Account deleted successfully.");
+            await showMessage("Account deleted successfully.", {
+                variant: "success"
+            });
 
             navigate("/login", {
                 replace: true
             });
         } catch (error) {
             console.error("Delete account error:", error);
-            alert(error.message || "Failed to delete account.");
+            await showMessage(error.message || "Failed to delete account.", {
+                variant: "error"
+            });
         } finally {
             setIsDeleting(false);
         }

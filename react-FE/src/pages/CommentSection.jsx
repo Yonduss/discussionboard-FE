@@ -3,12 +3,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import api from "../api/api.js";
 import CommentForm from "../components/CommentForm.jsx";
 import TextInputModal from "../components/TextInputModal.jsx";
+import { useModal } from "../contexts/ModalContext.js";
 import CommentItem from "./CommentItem.jsx";
 
 function CommentSection({
                             postId,
                             onCommentCountChange
                         }) {
+    const { showMessage, showConfirm } = useModal();
     const [comments, setComments] = useState([]);
 
     const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -46,11 +48,14 @@ function CommentSection({
         } catch (error) {
             console.error("Comments refresh error:", error);
 
-            alert(error.message || "Failed to refresh comments.");
+            await showMessage(
+                error.message || "Failed to refresh comments.",
+                { variant: "error" }
+            );
         } finally {
             setIsRefreshing(false);
         }
-    }, [postId, applyComments]);
+    }, [postId, applyComments, showMessage]);
 
     useEffect(() => {
         let cancelled = false;
@@ -67,7 +72,10 @@ function CommentSection({
             } catch (error) {
                 if (!cancelled) {
                     console.error("Comments fetch error:", error);
-                    alert(error.message || "Failed to load comments.");
+                    await showMessage(
+                        error.message || "Failed to load comments.",
+                        { variant: "error" }
+                    );
                 }
             } finally {
                 if (!cancelled) {
@@ -81,7 +89,7 @@ function CommentSection({
         return () => {
             cancelled = true;
         };
-    }, [postId, applyComments]);
+    }, [postId, applyComments, showMessage]);
 
     const {parentComments, repliesByParent}
         = useMemo(() => {
@@ -129,7 +137,10 @@ function CommentSection({
             return true;
         } catch (error) {
             console.error("Adding comment error:", error);
-            alert(error.message || "Failed to add a comment.");
+            await showMessage(
+                error.message || "Failed to add a comment.",
+                { variant: "error" }
+            );
 
             return false;
         } finally {
@@ -205,12 +216,13 @@ function CommentSection({
                 isReply ? "Adding reply error:" : "Update comment error:",
                 error
             );
-            alert(
+            await showMessage(
                 error.message || (
                     isReply
                         ? "Failed to add a reply."
                         : "Failed to update comment."
-                )
+                ),
+                { variant: "error" }
             );
         } finally {
             setIsMutating(false);
@@ -222,7 +234,16 @@ function CommentSection({
             return;
         }
 
-        if (!window.confirm("Delete this comment?")) {
+        const confirmed = await showConfirm(
+            "Are you sure you want to delete this comment?",
+            {
+                title: "Delete comment",
+                confirmText: "Delete",
+                confirmVariant: "danger"
+            }
+        );
+
+        if (!confirmed) {
             return;
         }
 
@@ -236,7 +257,10 @@ function CommentSection({
             await refreshComments();
         } catch (error) {
             console.error("Delete comment error:", error);
-            alert(error.message || "Failed to delete comment.");
+            await showMessage(
+                error.message || "Failed to delete comment.",
+                { variant: "error" }
+            );
         } finally {
             setIsMutating(false);
         }

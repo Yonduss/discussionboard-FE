@@ -5,6 +5,7 @@ import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import ImageUrlInputs from "../components/ImageUrlInputs.jsx";
 import { useAuth } from "../contexts/AuthContext.js";
+import { useModal } from "../contexts/ModalContext.js";
 import { createClientId } from "../utils/createClientId.js";
 
 import "../styles/post-write.css";
@@ -13,6 +14,7 @@ function PostEditPage() {
     const { postId } = useParams();
     const navigate = useNavigate();
     const { currentUser } = useAuth();
+    const { showMessage } = useModal();
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -24,7 +26,9 @@ function PostEditPage() {
     useEffect(() => {
         async function initializePage() {
             if (!postId) {
-                alert("Post id is missing.");
+                await showMessage("Post id is missing.", {
+                    variant: "error"
+                });
                 navigate("/posts", { replace: true });
                 return;
             }
@@ -39,7 +43,10 @@ function PostEditPage() {
                 const isAuthor = Number(post.userId) === Number(currentUser.id);
 
                 if (!isAuthor) {
-                    alert("You are not allowed to edit this post.");
+                    await showMessage(
+                        "You are not allowed to edit this post.",
+                        { variant: "error" }
+                    );
 
                     navigate(`/posts/${postId}`, {
                         replace: true
@@ -66,7 +73,9 @@ function PostEditPage() {
                 setImages(loadedImages);
             } catch (error) {
                 console.error("Initialize post edit page error:", error);
-                alert(error.message || "Failed to load post.");
+                await showMessage(error.message || "Failed to load post.", {
+                    variant: "error"
+                });
 
                 navigate(`/posts/${postId}`, {
                     replace: true
@@ -81,7 +90,8 @@ function PostEditPage() {
     }, [
         postId,
         navigate,
-        currentUser
+        currentUser,
+        showMessage
     ]);
 
     async function handleSubmit(event) {
@@ -91,12 +101,12 @@ function PostEditPage() {
         const trimmedContent = content.trim();
 
         if (!trimmedTitle) {
-            alert("Title is required.");
+            await showMessage("Title is required.");
             return;
         }
 
         if (!trimmedContent) {
-            alert("Content is required.");
+            await showMessage("Content is required.");
             return;
         }
 
@@ -115,14 +125,18 @@ function PostEditPage() {
                 }
             );
 
-            alert("Post updated successfully.");
+            await showMessage("Post updated successfully.", {
+                variant: "success"
+            });
 
             navigate(`/posts/${postId}`, {
                 replace: true
             });
         } catch (error) {
             console.error("Update post error:", error);
-            alert(error.message || "Failed to update post.");
+            await showMessage(error.message || "Failed to update post.", {
+                variant: "error"
+            });
         } finally {
             setIsSubmitting(false);
         }

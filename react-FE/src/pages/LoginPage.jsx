@@ -3,12 +3,14 @@ import { useAuth } from "../contexts/AuthContext.js";
 import { Link, useNavigate} from "react-router-dom";
 
 import api from "../api/api.js";
+import { useModal } from "../contexts/ModalContext.js";
 import "../styles/auth.css";
 import mlbLogo from "../images/MLB_logo.svg";
 
 function LoginPage() {
     const navigate = useNavigate();
     const { loadCurrentUser } = useAuth();
+    const { showMessage } = useModal();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -21,7 +23,7 @@ function LoginPage() {
         const trimmedPassword = password.trim();
 
         if (!trimmedEmail || !trimmedPassword) {
-            alert("Please enter a valid email and password.");
+            await showMessage("Please enter a valid email and password.");
             return;
         }
 
@@ -51,11 +53,15 @@ function LoginPage() {
             console.error("Login error:", error);
 
             if (error.status === 401) {
-                alert("Email or password is incorrect.");
+                await showMessage("Email or password is incorrect.", {
+                    variant: "error"
+                });
                 return;
             }
 
-            alert(error.message || "Login failed.");
+            await showMessage(error.message || "Login failed.", {
+                variant: "error"
+            });
         } finally {
             setIsSubmitting(false);
         }

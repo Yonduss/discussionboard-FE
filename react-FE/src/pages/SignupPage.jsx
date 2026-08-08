@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import api from "../api/api.js";
+import { useModal } from "../contexts/ModalContext.js";
 import mlbLogo from "../images/MLB_logo.svg";
 import "../styles/auth.css";
 
 function SignupPage() {
     const navigate = useNavigate();
+    const { showMessage } = useModal();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -109,14 +111,20 @@ function SignupPage() {
                 }
             );
 
-            alert("Sign up successful!");
+            await showMessage("Sign up successful!", {
+                title: "Welcome to MLB Board",
+                variant: "success"
+            });
             navigate("/login", {
                 replace: true
             });
 
         } catch (error) {
             console.error("Sign up error:", error);
-            alert(error.message || "Server connection failed.");
+            await showMessage(
+                error.message || "Server connection failed.",
+                { variant: "error" }
+            );
         } finally {
             setIsSubmitting(false);
         }

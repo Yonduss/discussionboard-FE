@@ -5,6 +5,7 @@ import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import PostCard from "../components/PostCard.jsx";
 import TodayGamesSidebar from "../components/TodayGamesSidebar.jsx";
+import { useModal } from "../contexts/ModalContext.js";
 
 import "../styles/post.css";
 
@@ -12,6 +13,7 @@ const PAGE_SIZE = 10;
 
 function PostsPage() {
     const navigate = useNavigate();
+    const { showMessage } = useModal();
 
     const [posts, setPosts] = useState([]);
     const [hasNext, setHasNext] = useState(true);
@@ -90,13 +92,15 @@ function PostsPage() {
                 currentPageRef.current = requestedPage + 1;
             } catch (error) {
                 console.error("Posts fetch error:", error);
-                alert(error.message || "Failed to load posts.");
+                await showMessage(error.message || "Failed to load posts.", {
+                    variant: "error"
+                });
             } finally {
                 isLoadingRef.current = false;
                 setIsLoading(false);
             }
         },
-        [activeKeyword]
+        [activeKeyword, showMessage]
     );
 
     useEffect(() => {

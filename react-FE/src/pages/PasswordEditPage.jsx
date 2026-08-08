@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api, { clearTokens } from "../api/api.js";
 import Header from "../components/Header.jsx";
 import { useAuth } from "../contexts/AuthContext.js";
+import { useModal } from "../contexts/ModalContext.js";
 
 import "../styles/auth.css";
 import "../styles/user-edit.css";
@@ -11,6 +12,7 @@ import "../styles/user-edit.css";
 function PasswordEditPage() {
     const navigate = useNavigate();
     const { setCurrentUser } = useAuth();
+    const { showMessage } = useModal();
 
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -29,12 +31,14 @@ function PasswordEditPage() {
         event.preventDefault();
 
         if (!currentPassword || !newPassword || !newPasswordConfirm) {
-            alert("All fields are required to change your password.");
+            await showMessage(
+                "All fields are required to change your password."
+            );
             return;
         }
 
         if (newPassword !== newPasswordConfirm) {
-            alert("New passwords do not match.");
+            await showMessage("New passwords do not match.");
             return;
         }
 
@@ -53,7 +57,10 @@ function PasswordEditPage() {
             clearTokens();
             setCurrentUser(null);
 
-            alert("Password changed successfully. Please log in again.");
+            await showMessage(
+                "Password changed successfully. Please log in again.",
+                { variant: "success" }
+            );
 
             navigate("/login", {
                 replace: true
@@ -61,7 +68,10 @@ function PasswordEditPage() {
 
         } catch (error) {
             console.error("Password change error:", error);
-            alert(error.message || "Failed to change password.");
+            await showMessage(
+                error.message || "Failed to change password.",
+                { variant: "error" }
+            );
         } finally {
             setIsSubmitting(false);
         }

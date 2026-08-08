@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import ImageUrlInputs from "../components/ImageUrlInputs.jsx";
+import { useModal } from "../contexts/ModalContext.js";
 import { createClientId } from "../utils/createClientId.js";
 
 import "../styles/post-write.css";
 
 function PostWritePage() {
     const navigate = useNavigate();
+    const { showMessage } = useModal();
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -32,7 +34,7 @@ function PostWritePage() {
         const trimmedContent = content.trim();
 
         if (!trimmedTitle || !trimmedContent) {
-            alert("Title and content are required.");
+            await showMessage("Title and content are required.");
             return;
         }
 
@@ -52,7 +54,9 @@ function PostWritePage() {
                 }
             );
 
-            alert("Post created successfully.");
+            await showMessage("Post created successfully.", {
+                variant: "success"
+            });
 
             navigate(`/posts/${result.data.id}`, {
                 replace: true
@@ -60,7 +64,9 @@ function PostWritePage() {
 
         } catch (error) {
             console.error("Create post error:", error);
-            alert(error.message || "Failed to create post.");
+            await showMessage(error.message || "Failed to create post.", {
+                variant: "error"
+            });
         } finally {
             setIsSubmitting(false);
         }

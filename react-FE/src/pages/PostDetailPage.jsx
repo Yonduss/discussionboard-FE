@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api, { formatDate } from "../api/api.js";
 import { useAuth } from "../contexts/AuthContext.js";
+import { useModal } from "../contexts/ModalContext.js";
 import emptyProfileImage from "../images/empty-profile-image.png";
 import Header from "../components/Header.jsx";
 import TextInputModal from "../components/TextInputModal.jsx";
@@ -14,6 +15,7 @@ function PostDetailPage() {
     const navigate = useNavigate();
 
     const { currentUser } = useAuth();
+    const { showMessage, showConfirm } = useModal();
     const [post, setPost] = useState(null);
     const [commentCount,setCommentCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +25,9 @@ function PostDetailPage() {
     useEffect(() => {
         async function initializePage() {
             if (!postId) {
-                alert("Post id is missing.");
+                await showMessage("Post id is missing.", {
+                    variant: "error"
+                });
                 navigate("/posts", {
                     replace: true
                 });
@@ -38,7 +42,9 @@ function PostDetailPage() {
                 setCommentCount(postResult.data.commentCount);
             } catch(error) {
                 console.error(error);
-                alert(error.message || "Failed to load post.");
+                await showMessage(error.message || "Failed to load post.", {
+                    variant: "error"
+                });
                 navigate("/posts", {
                     replace:true
                 });
@@ -49,25 +55,38 @@ function PostDetailPage() {
 
         initializePage();
 
-    }, [postId, navigate]);
+    }, [postId, navigate, showMessage]);
 
     function handleEditPost() {
         navigate(`/posts/${postId}/edit`);
     }
 
     async function handleDeletePost() {
-        if (!window.confirm("Are you sure you want to delete this post?")) {
+        const confirmed = await showConfirm(
+            "Are you sure you want to delete this post? This cannot be undone.",
+            {
+                title: "Delete post",
+                confirmText: "Delete",
+                confirmVariant: "danger"
+            }
+        );
+
+        if (!confirmed) {
             return;
         }
 
         try {
             await api.delete(`/api/v1/posts/${postId}`);
 
-            alert("Post deleted successfully.");
+            await showMessage("Post deleted successfully.", {
+                variant: "success"
+            });
             navigate("/posts", { replace: true });
         } catch (error) {
             console.error("Delete post error:", error);
-            alert(error.message || "Failed to delete post.");
+            await showMessage(error.message || "Failed to delete post.", {
+                variant: "error"
+            });
         }
     }
 
@@ -85,7 +104,9 @@ function PostDetailPage() {
 
         } catch(error) {
             console.error("Like error:", error);
-            alert(error.message || "Failed to like post.");
+            await showMessage(error.message || "Failed to like post.", {
+                variant: "error"
+            });
         }
     }
 
@@ -103,7 +124,9 @@ function PostDetailPage() {
 
         } catch(error) {
             console.error("Unlike error:", error);
-            alert(error.message || "Failed to unlike post.");
+            await showMessage(error.message || "Failed to unlike post.", {
+                variant: "error"
+            });
         }
     }
 
@@ -133,11 +156,15 @@ function PostDetailPage() {
             );
 
             setIsReportModalOpen(false);
-            alert("Post reported successfully.");
+            await showMessage("Post reported successfully.", {
+                variant: "success"
+            });
             navigate("/posts", { replace: true });
         } catch (error) {
             console.error("Report post error:", error);
-            alert(error.message || "Failed to report post.");
+            await showMessage(error.message || "Failed to report post.", {
+                variant: "error"
+            });
         } finally {
             setIsReporting(false);
         }

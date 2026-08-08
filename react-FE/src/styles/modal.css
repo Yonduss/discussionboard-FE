@@ -40,6 +40,34 @@
     line-height: 1.5;
 }
 
+.message-modal,
+.confirm-modal {
+    width: min(calc(100% - 32px), 460px);
+}
+
+.message-modal-type {
+    width: fit-content;
+    padding: 4px 8px;
+    border-radius: 999px;
+    color: #002d72;
+    background: #eaf0f8;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.message-modal.success .message-modal-type {
+    color: #ffffff;
+    background: #002d72;
+}
+
+.message-modal.error .message-modal-type,
+.message-modal-type.danger {
+    color: #ffffff;
+    background: #D50032;
+}
+
 .text-modal-input {
     width: 100%;
     min-height: 130px;

@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useModal } from "../contexts/ModalContext.js";
 
 function CommentForm({ onSubmit, isSubmitting }) {
+    const { showMessage } = useModal();
     const [content, setContent] = useState("");
 
     async function handleSubmit(event) {
@@ -9,7 +11,7 @@ function CommentForm({ onSubmit, isSubmitting }) {
         const trimmedContent = content.trim();
 
         if (!trimmedContent) {
-            alert("Please enter a comment.");
+            await showMessage("Please enter a comment.");
             return;
         }
 
