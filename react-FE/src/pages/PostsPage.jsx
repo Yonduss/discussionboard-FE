@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 import Header from "../components/Header.jsx";
 import PostCard from "../components/PostCard.jsx";
+import TodayGamesSidebar from "../components/TodayGamesSidebar.jsx";
 
 import "../styles/post.css";
 
@@ -158,99 +159,103 @@ function PostsPage() {
         <>
             <Header />
 
-            <main className="main-container">
-                <div className="header-section">
-                    <button
-                        type="button"
-                        className="create-post-btn"
-                        onClick={() =>
-                            navigate("/posts/new")
-                        }
-                    >
-                        + Create Post
-                    </button>
-
-                    <form
-                        className="post-search-form"
-                        onSubmit={handleSearch}
-                    >
-                        <input
-                            type="search"
-                            maxLength={100}
-                            className="post-search-input"
-                            value={searchInput}
-                            onChange={(event) =>
-                                setSearchInput(
-                                    event.target.value
-                                )
+            <main className="main-container posts-page-container">
+                <div className="posts-page-content">
+                    <div className="header-section">
+                        <button
+                            type="button"
+                            className="create-post-btn"
+                            onClick={() =>
+                                navigate("/posts/new")
                             }
-                            placeholder="Search by title or content"
-                            aria-label="Search posts"
-                        />
+                        >
+                            + Create Post
+                        </button>
 
-                        <div className="post-search-actions">
-                            <button
-                                type="submit"
-                                className="search-post-btn"
-                                disabled={isLoading}
-                            >
-                                🔎 Search
-                            </button>
-
-                            <button
-                                type="button"
-                                className="reset-search-btn"
-                                onClick={
-                                    handleResetSearch
+                        <form
+                            className="post-search-form"
+                            onSubmit={handleSearch}
+                        >
+                            <input
+                                type="search"
+                                maxLength={100}
+                                className="post-search-input"
+                                value={searchInput}
+                                onChange={(event) =>
+                                    setSearchInput(
+                                        event.target.value
+                                    )
                                 }
-                                disabled={isLoading}
-                            >
-                                🔄 Reset
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                                placeholder="Search by title or content"
+                                aria-label="Search posts"
+                            />
 
-                {activeKeyword && (
-                    <div className="search-result-info">
-                        Search results for:{" "}
-                        <strong>
-                            {activeKeyword}
-                        </strong>
+                            <div className="post-search-actions">
+                                <button
+                                    type="submit"
+                                    className="search-post-btn"
+                                    disabled={isLoading}
+                                >
+                                    🔎 Search
+                                </button>
+
+                                <button
+                                    type="button"
+                                    className="reset-search-btn"
+                                    onClick={
+                                        handleResetSearch
+                                    }
+                                    disabled={isLoading}
+                                >
+                                    🔄 Reset
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                )}
 
-                <section className="posts-list">
-                    {posts.map((post) => (
-                        <PostCard
-                            key={post.id}
-                            post={post}
-                        />
-                    ))}
-
-                    {isLoading && (
-                        <div className="posts-loading">
-                            Loading posts...
+                    {activeKeyword && (
+                        <div className="search-result-info">
+                            Search results for:{" "}
+                            <strong>
+                                {activeKeyword}
+                            </strong>
                         </div>
                     )}
 
-                    {!isLoading &&
-                        !hasNext &&
-                        posts.length > 0 && (
-                            <div className="posts-end">
-                                No more posts.
+                    <section className="posts-list">
+                        {posts.map((post) => (
+                            <PostCard
+                                key={post.id}
+                                post={post}
+                            />
+                        ))}
+
+                        {isLoading && (
+                            <div className="posts-loading">
+                                Loading posts...
                             </div>
                         )}
 
-                    {!isLoading &&
-                        posts.length === 0 && (
-                            <div className="posts-empty">
-                                {activeKeyword
-                                    ? "No matching posts found."
-                                    : "No posts available."}
-                            </div>
-                        )}
-                </section>
+                        {!isLoading &&
+                            !hasNext &&
+                            posts.length > 0 && (
+                                <div className="posts-end">
+                                    No more posts.
+                                </div>
+                            )}
+
+                        {!isLoading &&
+                            posts.length === 0 && (
+                                <div className="posts-empty">
+                                    {activeKeyword
+                                        ? "No matching posts found."
+                                        : "No posts available."}
+                                </div>
+                            )}
+                    </section>
+                </div>
+
+                <TodayGamesSidebar />
             </main>
         </>
     );

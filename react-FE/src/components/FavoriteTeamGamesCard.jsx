@@ -70,7 +70,9 @@ function GameList({ games, emptyMessage, showResult }) {
                             >
                                 {showResult
                                     ? game.result
-                                    : game.detailedState || game.status}
+                                    : game.status === "LIVE"
+                                        ? "LIVE"
+                                        : game.detailedState || game.status}
                             </span>
                         </div>
 

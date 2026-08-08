@@ -4,6 +4,107 @@
     position: relative;
 }
 
+.posts-page-container {
+    width: min(calc(100% - 32px), 1020px);
+    display: grid;
+    grid-template-columns: minmax(0, 700px) 280px;
+    align-items: start;
+    gap: 24px;
+}
+
+.posts-page-content {
+    min-width: 0;
+}
+
+.today-games-sidebar {
+    position: sticky;
+    top: 24px;
+    padding: 20px;
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+.today-games-heading span {
+    color: #d50032;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.today-games-heading h2 {
+    margin: 4px 0 16px;
+    color: #002d72;
+    font-size: 20px;
+}
+
+.today-games-list {
+    max-height: 560px;
+    overflow-y: auto;
+    border-top: 1px solid #e2e5e9;
+}
+
+.today-game-row {
+    padding: 11px 2px;
+    border-bottom: 1px solid #e2e5e9;
+}
+
+.today-game-matchup,
+.today-game-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.today-game-matchup strong {
+    flex: 1;
+    color: #1f2937;
+    font-size: 13px;
+}
+
+.today-game-matchup strong:last-child {
+    text-align: right;
+}
+
+.today-game-matchup > span {
+    color: #8a929d;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.today-game-meta {
+    margin-top: 6px;
+    color: #6b7280;
+    font-size: 10px;
+}
+
+.today-game-meta > span {
+    text-transform: capitalize;
+}
+
+.today-game-live {
+    padding: 2px 6px;
+    border-radius: 999px;
+    color: #ffffff;
+    background: #d50032;
+    font-weight: 800;
+}
+
+.today-games-message {
+    margin: 0;
+    padding: 24px 4px;
+    color: #6b7280;
+    text-align: center;
+    font-size: 13px;
+}
+
+.today-games-message.error {
+    color: #d50032;
+}
+
 .header-section {
     display: flex;
     flex-direction: column;

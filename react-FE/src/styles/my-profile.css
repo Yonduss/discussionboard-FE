@@ -167,6 +167,10 @@
     min-width: 0;
 }
 
+.profile-overview-grid {
+    align-items: start;
+}
+
 .profile-card-heading {
     display: flex;
     align-items: flex-start;
@@ -250,7 +254,7 @@
 }
 
 .selected-team-panel {
-    margin-top: 32px;
+    margin-top: 30px;
     padding: 18px 20px;
     display: flex;
     align-items: center;
