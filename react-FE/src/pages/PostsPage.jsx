@@ -162,16 +162,6 @@ function PostsPage() {
             <main className="main-container posts-page-container">
                 <div className="posts-page-content">
                     <div className="header-section">
-                        <button
-                            type="button"
-                            className="create-post-btn"
-                            onClick={() =>
-                                navigate("/posts/new")
-                            }
-                        >
-                            + Create Post
-                        </button>
-
                         <form
                             className="post-search-form"
                             onSubmit={handleSearch}
@@ -255,7 +245,16 @@ function PostsPage() {
                     </section>
                 </div>
 
-                <TodayGamesSidebar />
+                <div className="posts-sidebar-column">
+                    <button
+                        type="button"
+                        className="create-post-btn"
+                        onClick={() => navigate("/posts/new")}
+                    >
+                        + Create Post
+                    </button>
+                    <TodayGamesSidebar />
+                </div>
             </main>
         </>
     );

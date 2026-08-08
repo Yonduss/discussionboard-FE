@@ -1,11 +1,29 @@
 import { useEffect, useState } from "react";
 
 import api from "../api/api.js";
+import { findMlbTeam } from "../data/mlbTeams.js";
 
 const gameTimeFormatter = new Intl.DateTimeFormat(navigator.language, {
     hour: "2-digit",
     minute: "2-digit"
 });
+
+function TodayGameTeam({ teamCode }) {
+    const team = findMlbTeam(teamCode);
+
+    return (
+        <span className="today-game-team">
+            {team && (
+                <img
+                    src={team.logoPath}
+                    alt=""
+                    aria-hidden="true"
+                />
+            )}
+            <strong>{teamCode}</strong>
+        </span>
+    );
+}
 
 function TodayGamesSidebar() {
     const [games, setGames] = useState([]);
@@ -72,9 +90,9 @@ function TodayGamesSidebar() {
                         return (
                             <article className="today-game-row" key={game.gamePk}>
                                 <div className="today-game-matchup">
-                                    <strong>{game.awayTeam}</strong>
+                                    <TodayGameTeam teamCode={game.awayTeam} />
                                     <span>vs</span>
-                                    <strong>{game.homeTeam}</strong>
+                                    <TodayGameTeam teamCode={game.homeTeam} />
                                 </div>
                                 <div className="today-game-meta">
                                     <time dateTime={game.gameDate}>
