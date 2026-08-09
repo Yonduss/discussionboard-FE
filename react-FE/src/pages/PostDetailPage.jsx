@@ -21,6 +21,7 @@ function PostDetailPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isReportModalOpen, setIsReportModalOpen] = useState(false);
     const [isReporting, setIsReporting] = useState(false);
+    const [isLikeSubmitting, setIsLikeSubmitting] = useState(false);
 
     useEffect(() => {
         async function initializePage() {
@@ -91,7 +92,13 @@ function PostDetailPage() {
     }
 
     async function handleLikePost() {
+        if (isLikeSubmitting) {
+            return;
+        }
+
         try {
+            setIsLikeSubmitting(true);
+
             const result = await api.post(
                 `/api/v1/posts/${postId}/likes`
             );
@@ -107,11 +114,19 @@ function PostDetailPage() {
             await showMessage(error.message || "Failed to like post.", {
                 variant: "error"
             });
+        } finally {
+            setIsLikeSubmitting(false);
         }
     }
 
     async function handleUnlikePost() {
+        if (isLikeSubmitting) {
+            return;
+        }
+
         try {
+            setIsLikeSubmitting(true);
+
             const result = await api.delete(
                 `/api/v1/posts/${postId}/likes`
             );
@@ -127,6 +142,8 @@ function PostDetailPage() {
             await showMessage(error.message || "Failed to unlike post.", {
                 variant: "error"
             });
+        } finally {
+            setIsLikeSubmitting(false);
         }
     }
 
@@ -275,6 +292,8 @@ function PostDetailPage() {
                         type="button"
                         className="like-button"
                         onClick={post.liked ? handleUnlikePost : handleLikePost}
+                        disabled={isLikeSubmitting}
+                        aria-busy={isLikeSubmitting}
                     >
                         {post.liked ? "❤️" : "👍"}
                         <span>{post.likeCount}</span>
