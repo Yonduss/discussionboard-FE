@@ -15,7 +15,6 @@
 | 프로젝트 기간 | 2026-05-26 – 2026-08-09 |
 | 프론트엔드    | [Yonduss/discussionboard-FE](https://github.com/Yonduss/discussionboard-FE) |
 | 백엔드        | [Yonduss/discussion-board](https://github.com/Yonduss/discussion-board) |
-| 배포 URL      | [MLB discussion board](http://3.36.75.160) |
 | 서비스 영상   | [Google drive](https://drive.google.com/file/d/10yFmX8xnkVNDT6rWMpzz3QG9Sz7QH4dr/view?usp=sharing) |
 
 ---

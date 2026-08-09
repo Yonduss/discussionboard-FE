@@ -15,7 +15,6 @@ The project began with separate Vanilla JavaScript pages and was migrated to a c
 | Project period                   | 2026-05-26 – 2026-08-09                                                                            |
 | Frontend repository              | [Yonduss/discussionboard-FE](https://github.com/Yonduss/discussionboard-FE)                        |
 | Backend repository               | [Yonduss/discussion-board](https://github.com/Yonduss/discussion-board)                            |
-| Production URL                   | [MLB discussion board](http://3.36.75.160)                                                         |
 | Service video                    | [Google drive](https://drive.google.com/file/d/10yFmX8xnkVNDT6rWMpzz3QG9Sz7QH4dr/view?usp=sharing) |
 
 ---
