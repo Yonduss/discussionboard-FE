@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import api, { formatDate } from "../api/api.js";
+import api from "../api/api.js";
+import { formatPostDateTime } from "../utils/dateTime.js";
 import FavoriteTeamGamesCard from "../components/FavoriteTeamGamesCard.jsx";
 import Header from "../components/Header.jsx";
 import ProfileImageChoiceModal from "../components/ProfileImageChoiceModal.jsx";
@@ -353,7 +354,7 @@ function MyProfilePage() {
                                         >
                                             <div>
                                                 <strong>{post.title}</strong>
-                                                <span>{formatDate(post.createdAt)}</span>
+                                                <span>{formatPostDateTime(post.createdAt)}</span>
                                             </div>
                                             <div className="profile-activity-stats">
                                                 <span>♥ {post.likeCount}</span>
@@ -399,7 +400,7 @@ function MyProfilePage() {
                                             <div>
                                                 <strong>{comment.postTitle}</strong>
                                                 <p>{comment.content}</p>
-                                                <span>{formatDate(comment.createdAt)}</span>
+                                                <span>{formatPostDateTime(comment.createdAt)}</span>
                                             </div>
                                         </Link>
                                     ))}

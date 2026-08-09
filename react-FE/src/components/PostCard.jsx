@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { formatDate } from "../api/api.js";
+import { formatPostDateTime } from "../utils/dateTime.js";
 import emptyProfileImage from "../images/empty-profile-image.png";
 
 function PostCard({ post }) {
@@ -34,7 +34,7 @@ function PostCard({ post }) {
                 </div>
 
                 <div className="author-info">
-                    {post.nickname} · {formatDate(displayedTime)}
+                    {post.nickname} · {formatPostDateTime(displayedTime)}
                 </div>
             </div>
 

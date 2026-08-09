@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 
 import api from "../api/api.js";
 import { findMlbTeam } from "../data/mlbTeams.js";
-
-const gameTimeFormatter = new Intl.DateTimeFormat(navigator.language, {
-    hour: "2-digit",
-    minute: "2-digit"
-});
+import { formatGameTime, formatShortMonthDay } from "../utils/dateTime.js";
 
 function TodayGameTeam({ teamCode }) {
     const team = findMlbTeam(teamCode);
@@ -27,6 +23,7 @@ function TodayGameTeam({ teamCode }) {
 
 function TodayGamesSidebar() {
     const [games, setGames] = useState([]);
+    const [scheduleDate, setScheduleDate] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -39,6 +36,7 @@ function TodayGamesSidebar() {
 
                 if (!cancelled) {
                     setGames(result.data?.games ?? []);
+                    setScheduleDate(result.data?.date ?? "");
                 }
             } catch (requestError) {
                 if (!cancelled) {
@@ -65,7 +63,14 @@ function TodayGamesSidebar() {
         <aside className="today-games-sidebar" aria-labelledby="today-games-title">
             <div className="today-games-heading">
                 <span>MLB SCHEDULE</span>
-                <h2 id="today-games-title">Today&apos;s Games</h2>
+                <div className="today-games-title-row">
+                    <h2 id="today-games-title">Today&apos;s Games</h2>
+                    {scheduleDate && (
+                        <time dateTime={scheduleDate}>
+                            {formatShortMonthDay(scheduleDate)}
+                        </time>
+                    )}
+                </div>
             </div>
 
             {isLoading && (
@@ -96,9 +101,7 @@ function TodayGamesSidebar() {
                                 </div>
                                 <div className="today-game-meta">
                                     <time dateTime={game.gameDate}>
-                                        {gameTimeFormatter.format(
-                                            new Date(game.gameDate)
-                                        )}
+                                        {formatGameTime(game.gameDate)}
                                     </time>
                                     {isLive ? (
                                         <span className="today-game-live">

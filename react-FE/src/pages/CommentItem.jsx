@@ -1,4 +1,4 @@
-import { formatDate } from "../api/api.js";
+import { formatPostDateTime } from "../utils/dateTime.js";
 import { useAuth } from "../contexts/AuthContext.js";
 import emptyProfileImage from "../images/empty-profile-image.png";
 
@@ -42,7 +42,7 @@ function CommentItem({
                     </div>
 
                     <div className="comment-time">
-                        {formatDate(displayedTime)}
+                        {formatPostDateTime(displayedTime)}
                     </div>
                 </div>
 

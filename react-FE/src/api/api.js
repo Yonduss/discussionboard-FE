@@ -1,6 +1,4 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
-const userLang = navigator.language;
-
 let refreshPromise = null;
 
 export class APIError extends Error {
@@ -23,12 +21,6 @@ export function getRefreshToken() {
 export function clearTokens() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-}
-
-export function formatDate(dateString) {
-    const date = new Date(dateString);
-
-    return date.toLocaleString(userLang);
 }
 
 async function parseResponse(response) {

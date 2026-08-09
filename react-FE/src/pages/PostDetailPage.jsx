@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api, { formatDate } from "../api/api.js";
+import api from "../api/api.js";
+import { formatPostDateTime } from "../utils/dateTime.js";
 import { useAuth } from "../contexts/AuthContext.js";
 import { useModal } from "../contexts/ModalContext.js";
 import emptyProfileImage from "../images/empty-profile-image.png";
@@ -240,7 +241,7 @@ function PostDetailPage() {
                                 </div>
 
                                 <div className="post-time">
-                                    {formatDate(displayedTime)}
+                                    {formatPostDateTime(displayedTime)}
                                 </div>
                             </div>
                         </div>

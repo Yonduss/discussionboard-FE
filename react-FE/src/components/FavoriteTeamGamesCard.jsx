@@ -2,14 +2,7 @@ import { useEffect, useState } from "react";
 
 import api from "../api/api.js";
 import { findMlbTeam } from "../data/mlbTeams.js";
-
-const gameDateFormatter = new Intl.DateTimeFormat(navigator.language, {
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZoneName: "short"
-});
+import { formatGameDateTime } from "../utils/dateTime.js";
 
 function GameTeam({ teamCode, teamName, score }) {
     const team = findMlbTeam(teamCode);
@@ -59,7 +52,7 @@ function GameList({ games, emptyMessage, showResult }) {
 
                         <div className="favorite-game-meta">
                             <time dateTime={game.gameDate}>
-                                {gameDateFormatter.format(new Date(game.gameDate))}
+                                {formatGameDateTime(game.gameDate)}
                             </time>
                             <span
                                 className={`favorite-game-status ${
