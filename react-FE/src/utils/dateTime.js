@@ -1,4 +1,5 @@
 const DISPLAY_LOCALE = "en-US";
+const DISPLAY_TIME_ZONE = "America/New_York";
 
 const postDateTimeFormatter = new Intl.DateTimeFormat(DISPLAY_LOCALE, {
     month: "2-digit",
@@ -7,7 +8,8 @@ const postDateTimeFormatter = new Intl.DateTimeFormat(DISPLAY_LOCALE, {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    hour12: true
+    hour12: true,
+    timeZone: DISPLAY_TIME_ZONE
 });
 
 const monthDayFormatter = new Intl.DateTimeFormat(DISPLAY_LOCALE, {
@@ -19,7 +21,8 @@ const monthDayFormatter = new Intl.DateTimeFormat(DISPLAY_LOCALE, {
 const gameTimeFormatter = new Intl.DateTimeFormat(DISPLAY_LOCALE, {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true
+    hour12: true,
+    timeZone: DISPLAY_TIME_ZONE
 });
 
 const gameDateTimeFormatter = new Intl.DateTimeFormat(DISPLAY_LOCALE, {
@@ -27,7 +30,8 @@ const gameDateTimeFormatter = new Intl.DateTimeFormat(DISPLAY_LOCALE, {
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true
+    hour12: true,
+    timeZone: DISPLAY_TIME_ZONE
 });
 
 function formatDateValue(value, formatter) {
