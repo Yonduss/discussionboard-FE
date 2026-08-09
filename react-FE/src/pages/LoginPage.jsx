@@ -20,9 +20,8 @@ function LoginPage() {
         event.preventDefault();
 
         const trimmedEmail = email.trim();
-        const trimmedPassword = password.trim();
 
-        if (!trimmedEmail || !trimmedPassword) {
+        if (!trimmedEmail || !password) {
             await showMessage("Please enter a valid email and password.");
             return;
         }
@@ -34,7 +33,7 @@ function LoginPage() {
                 "/api/v1/auth/login",
                 {
                     email: trimmedEmail,
-                    password: trimmedPassword
+                    password
                 },
                 {
                     auth: false
