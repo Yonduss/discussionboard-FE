@@ -64,3 +64,46 @@ jobs:
           tags: discussionboard-fe-frontend:ci
           cache-from: type=gha,scope=frontend
           cache-to: type=gha,mode=max,scope=frontend
+
+  integration-smoke:
+    name: Test API through nginx
+    needs:
+      - frontend-test
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_PROJECT_NAME: discussionboard-ci-frontend
+      FRONTEND_BUILD_CONTEXT: ../react-FE
+      HTTP_PORT: "8088"
+      MYSQL_DATABASE: discussionboard
+      MYSQL_USER: discussionboard
+      MYSQL_PASSWORD: ci-database-password
+      MYSQL_ROOT_PASSWORD: ci-root-password
+      JWT_SECRET: ci-only-jwt-secret-key-that-is-at-least-32-bytes
+
+    steps:
+      - name: Checkout frontend repository
+        uses: actions/checkout@v6
+
+      - name: Checkout backend repository
+        uses: actions/checkout@v6
+        with:
+          repository: Yonduss/discussion-board
+          ref: main
+          path: backend
+
+      - name: Start the integrated application
+        working-directory: backend
+        run: docker compose up -d --build --wait
+
+      - name: Verify signup, login, and posts through nginx
+        run: ./scripts/smoke-test.sh http://127.0.0.1:8088
+
+      - name: Show integration logs on failure
+        if: failure()
+        working-directory: backend
+        run: docker compose logs --no-color --tail=150
+
+      - name: Stop the integrated application
+        if: always()
+        working-directory: backend
+        run: docker compose down -v --remove-orphans
