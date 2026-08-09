@@ -37,7 +37,7 @@ update_env() {
 
 check_api_proxy() {
     status="$(curl --silent --show-error \
-        --retry 10 --retry-delay 3 \
+        --retry 20 --retry-delay 3 --retry-all-errors \
         --dump-header "$headers_file" \
         --output "$body_file" \
         --write-out '%{http_code}' \
@@ -61,7 +61,8 @@ docker compose --env-file "$env_file" -f "$compose_file" \
     up -d --no-deps --wait frontend
 
 curl --fail --silent --show-error \
-    --retry 10 --retry-delay 3 http://127.0.0.1/health >/dev/null
+    --retry 20 --retry-delay 3 --retry-all-errors \
+    http://127.0.0.1/health >/dev/null
 check_api_proxy
 
 docker compose --env-file "$env_file" -f "$compose_file" ps
