@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import api from "../api/api.js";
+import api, { clearTokens } from "../api/api.js";
 import { useModal } from "../contexts/ModalContext.js";
 
 function UserEditForm({
@@ -119,7 +119,7 @@ function UserEditForm({
 
             await api.delete("/api/v1/users");
 
-            localStorage.clear();
+            clearTokens();
             setCurrentUser(null);
 
             await showMessage("Account deleted successfully.", {
