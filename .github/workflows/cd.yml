@@ -26,11 +26,11 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   IMAGE_PREFIX: ghcr.io/yonduss/discussionboard-fe
-  IMAGE_TAG: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+  IMAGE_TAG: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || inputs.commit_sha }}
 
 jobs:
-  publish:
-    name: Publish frontend image
+  verify-source:
+    name: Verify tested deployment source
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event.workflow_run.conclusion == 'success' &&
